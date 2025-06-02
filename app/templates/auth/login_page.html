@@ -1,0 +1,33 @@
+{% extends "base.html" %} {% block title %}Login - Flash Feather{% endblock %}
+{% block module_imports %} import '/static/js/components/auth/login_form.js';
+import '/static/js/components/auth/google_signin_button.js'; {% endblock %} {%
+block content %}
+<div class="auth-container">
+  <h1>Welcome Back</h1>
+  <login-form></login-form>
+  <div class="divider"><span>or</span></div>
+  <google-signin-button></google-signin-button>
+
+  <div class="auth-links">
+    <p>Don't have an account? <a href="/register">Sign up here</a></p>
+    <p><a href="/">← Back to Home</a></p>
+  </div>
+</div>
+
+<style>
+  .auth-links {
+    text-align: center;
+    margin-top: 2rem;
+  }
+  .auth-links p {
+    margin: 0.5rem 0;
+  }
+  .auth-links a {
+    color: #667eea;
+    text-decoration: none;
+  }
+  .auth-links a:hover {
+    text-decoration: underline;
+  }
+</style>
+{% endblock %}
