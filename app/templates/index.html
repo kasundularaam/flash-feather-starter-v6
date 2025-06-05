@@ -10,29 +10,6 @@ block module_imports %} import '/static/js/components/global/app_header.js?v=1';
       A minimal, LLM-friendly web framework combining Python FastAPI, Jinja2
       templates, and Lit.js components.
     </p>
-
-    <div class="features">
-      <div class="feature">
-        <i class="fas fa-bolt"></i>
-        <h3>Lightning Fast</h3>
-        <p>Built on FastAPI with optimized performance</p>
-      </div>
-      <div class="feature">
-        <i class="fas fa-lock"></i>
-        <h3>Secure Auth</h3>
-        <p>JWT with HTTP-only cookies and Google OAuth</p>
-      </div>
-      <div class="feature">
-        <i class="fas fa-cloud"></i>
-        <h3>Production Ready</h3>
-        <p>Environment-aware with automatic deployments</p>
-      </div>
-    </div>
-
-    <div class="actions">
-      <a href="/login" class="btn primary">Get Started</a>
-      <a href="/register" class="btn secondary">Sign Up</a>
-    </div>
   </div>
 </div>
 
@@ -56,28 +33,6 @@ block module_imports %} import '/static/js/components/global/app_header.js?v=1';
     font-size: 1.2rem;
     margin-bottom: 3rem;
     opacity: 0.9;
-  }
-  .features {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin: 3rem 0;
-  }
-  .feature {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 2rem;
-    border-radius: 8px;
-    backdrop-filter: blur(10px);
-  }
-  .feature i {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-  }
-  .feature h3 {
-    margin-bottom: 1rem;
-  }
-  .actions {
-    margin-top: 3rem;
   }
   .btn {
     display: inline-block;
