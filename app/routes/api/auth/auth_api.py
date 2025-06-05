@@ -1,3 +1,5 @@
+# app/routes/api/auth_api.py
+
 import os
 from fastapi import APIRouter, Depends, HTTPException, Response, Request
 from fastapi.responses import RedirectResponse
@@ -9,10 +11,6 @@ from app.services.auth_service.google_auth_service import GoogleAuthService
 from .auth_schemas import RegisterRequest, LoginRequest, UserResponse, AuthResponse
 
 router = APIRouter(prefix="/api/auth")
-
-# Get expire times from environment
-ACCESS_TOKEN_EXPIRE = int(os.getenv("ACCESS_TOKEN_EXPIRE_SECONDS", "900"))
-REFRESH_TOKEN_EXPIRE = int(os.getenv("REFRESH_TOKEN_EXPIRE_SECONDS", "604800"))
 
 
 @router.get("/me", response_model=UserResponse)
@@ -43,22 +41,8 @@ async def register(user_data: RegisterRequest, response: Response, db: Session =
     db.commit()
     db.refresh(user)
 
-    # Create tokens and set cookies
-    tokens = AuthService.create_tokens(user.id)
-    response.set_cookie(
-        "access_token",
-        tokens["access_token"],
-        httponly=True,
-        samesite="lax",
-        max_age=ACCESS_TOKEN_EXPIRE
-    )
-    response.set_cookie(
-        "refresh_token",
-        tokens["refresh_token"],
-        httponly=True,
-        samesite="lax",
-        max_age=REFRESH_TOKEN_EXPIRE
-    )
+    # Create tokens and set cookies - all in one clean call!
+    AuthService.create_tokens_and_set_cookies(user.id, response)
 
     return AuthResponse(message="Registration successful", user=user)
 
@@ -70,22 +54,8 @@ async def login(login_data: LoginRequest, response: Response, db: Session = Depe
     if not user or not AuthService.pwd_context.verify(login_data.password, user.hashed_password):
         raise HTTPException(status_code=401, detail="Invalid credentials")
 
-    # Create tokens and set cookies
-    tokens = AuthService.create_tokens(user.id)
-    response.set_cookie(
-        "access_token",
-        tokens["access_token"],
-        httponly=True,
-        samesite="lax",
-        max_age=ACCESS_TOKEN_EXPIRE
-    )
-    response.set_cookie(
-        "refresh_token",
-        tokens["refresh_token"],
-        httponly=True,
-        samesite="lax",
-        max_age=REFRESH_TOKEN_EXPIRE
-    )
+    # Create tokens and set cookies - much cleaner!
+    AuthService.create_tokens_and_set_cookies(user.id, response)
 
     return AuthResponse(message="Login successful", user=user)
 
@@ -124,25 +94,9 @@ async def google_callback(request: Request, db: Session = Depends(get_db)):
                 user.profile_picture = user_info['picture']
                 db.commit()
 
-        # Create tokens and set cookies
-        tokens = AuthService.create_tokens(user.id)
-
-        # Redirect to home page with cookies set
+        # Create redirect response and set auth cookies
         response = RedirectResponse(url="/", status_code=302)
-        response.set_cookie(
-            "access_token",
-            tokens["access_token"],
-            httponly=True,
-            samesite="lax",
-            max_age=ACCESS_TOKEN_EXPIRE
-        )
-        response.set_cookie(
-            "refresh_token",
-            tokens["refresh_token"],
-            httponly=True,
-            samesite="lax",
-            max_age=REFRESH_TOKEN_EXPIRE
-        )
+        AuthService.create_tokens_and_set_cookies(user.id, response)
 
         return response
 
@@ -153,6 +107,6 @@ async def google_callback(request: Request, db: Session = Depends(get_db)):
 
 @router.post("/logout")
 async def logout(response: Response):
-    response.delete_cookie("access_token")
-    response.delete_cookie("refresh_token")
+    # Clean logout with centralized cookie clearing
+    AuthService.clear_auth_cookies(response)
     return {"message": "Logout successful"}

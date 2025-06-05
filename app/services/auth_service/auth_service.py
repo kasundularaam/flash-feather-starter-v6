@@ -2,6 +2,7 @@ import jwt
 import os
 from datetime import datetime, timedelta, timezone
 from passlib.context import CryptContext
+from fastapi import Response
 from app.database import get_db
 from app.models import User
 
@@ -31,6 +32,42 @@ class AuthService:
             "access_token": access_token,
             "refresh_token": refresh_token
         }
+
+    @classmethod
+    def set_auth_cookies(cls, response: Response, tokens: dict) -> None:
+        """Set authentication cookies on response"""
+        # Set access token cookie
+        response.set_cookie(
+            "access_token",
+            tokens["access_token"],
+            httponly=True,
+            samesite="lax",
+            secure=True,  # Enable in production with HTTPS
+            max_age=cls.ACCESS_TOKEN_EXPIRE_SECONDS
+        )
+
+        # Set refresh token cookie
+        response.set_cookie(
+            "refresh_token",
+            tokens["refresh_token"],
+            httponly=True,
+            samesite="lax",
+            secure=True,  # Enable in production with HTTPS
+            max_age=cls.REFRESH_TOKEN_EXPIRE_SECONDS
+        )
+
+    @classmethod
+    def clear_auth_cookies(cls, response: Response) -> None:
+        """Clear authentication cookies"""
+        response.delete_cookie("access_token")
+        response.delete_cookie("refresh_token")
+
+    @classmethod
+    def create_tokens_and_set_cookies(cls, user_id: int, response: Response) -> dict:
+        """Convenience method to create tokens and set cookies in one call"""
+        tokens = cls.create_tokens(user_id)
+        cls.set_auth_cookies(response, tokens)
+        return tokens
 
     @classmethod
     async def validate_and_refresh_token(cls, access_token: str, refresh_token: str = None, from_cookie: bool = False):
