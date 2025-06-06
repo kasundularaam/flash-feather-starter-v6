@@ -1,5 +1,4 @@
-import os
-from fastapi import Request, Response
+from fastapi import Request
 from starlette.middleware.base import BaseHTTPMiddleware
 from app.services.auth_service.auth_service import AuthService
 
