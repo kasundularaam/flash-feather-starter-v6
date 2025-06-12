@@ -1060,7 +1060,7 @@ content %}
 {% endblock %}
 ```
 
-## 🎨 Frontend Components (Lit.js)
+## 🎨 Frontend Components (Lit.js with Prefixed CSS)
 
 ### App Header Component
 
@@ -1129,22 +1129,24 @@ class AppHeader extends LitElement {
 
   render() {
     return html`
-      <header class="app-header">
-        <div class="header-container">
-          <div class="logo">
-            <a href="/">
+      <header class="app-header-container">
+        <div class="app-header-wrapper">
+          <div class="app-header-logo">
+            <a href="/" class="app-header-logo-link">
               <i class="fas fa-feather-alt"></i>
               Flash Feather
             </a>
           </div>
 
-          <nav class="header-nav">
+          <nav class="app-header-nav">
             ${this.user
               ? html`
-                  <div class="user-menu">
-                    <span class="user-name">Hello, ${this.user.name}!</span>
+                  <div class="app-header-user-menu">
+                    <span class="app-header-user-name"
+                      >Hello, ${this.user.name}!</span
+                    >
                     <button
-                      class="logout-btn"
+                      class="app-header-logout-btn"
                       @click=${this.handleLogout}
                       ?disabled=${this.loading}
                     >
@@ -1153,9 +1155,13 @@ class AppHeader extends LitElement {
                   </div>
                 `
               : html`
-                  <div class="auth-links">
-                    <a href="/login" class="nav-link">Login</a>
-                    <a href="/register" class="nav-link register">Register</a>
+                  <div class="app-header-auth-links">
+                    <a href="/login" class="app-header-nav-link">Login</a>
+                    <a
+                      href="/register"
+                      class="app-header-nav-link app-header-register"
+                      >Register</a
+                    >
                   </div>
                 `}
           </nav>
@@ -1163,13 +1169,13 @@ class AppHeader extends LitElement {
       </header>
 
       <style>
-        .app-header {
+        .app-header-container {
           background: rgba(255, 255, 255, 0.1);
           backdrop-filter: blur(10px);
           border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .header-container {
+        .app-header-wrapper {
           max-width: 1200px;
           margin: 0 auto;
           padding: 1rem 2rem;
@@ -1178,7 +1184,7 @@ class AppHeader extends LitElement {
           align-items: center;
         }
 
-        .logo a {
+        .app-header-logo-link {
           color: white;
           text-decoration: none;
           font-size: 1.5rem;
@@ -1188,22 +1194,22 @@ class AppHeader extends LitElement {
           gap: 0.5rem;
         }
 
-        .logo i {
+        .app-header-logo-link i {
           color: #4caf50;
         }
 
-        .user-menu {
+        .app-header-user-menu {
           display: flex;
           align-items: center;
           gap: 1rem;
         }
 
-        .user-name {
+        .app-header-user-name {
           color: white;
           font-weight: 500;
         }
 
-        .logout-btn {
+        .app-header-logout-btn {
           background: rgba(255, 255, 255, 0.2);
           color: white;
           border: 1px solid rgba(255, 255, 255, 0.3);
@@ -1213,21 +1219,21 @@ class AppHeader extends LitElement {
           transition: all 0.3s;
         }
 
-        .logout-btn:hover:not(:disabled) {
+        .app-header-logout-btn:hover:not(:disabled) {
           background: rgba(255, 255, 255, 0.3);
         }
 
-        .logout-btn:disabled {
+        .app-header-logout-btn:disabled {
           opacity: 0.6;
           cursor: not-allowed;
         }
 
-        .auth-links {
+        .app-header-auth-links {
           display: flex;
           gap: 1rem;
         }
 
-        .nav-link {
+        .app-header-nav-link {
           color: white;
           text-decoration: none;
           padding: 0.5rem 1rem;
@@ -1235,16 +1241,16 @@ class AppHeader extends LitElement {
           transition: all 0.3s;
         }
 
-        .nav-link:hover {
+        .app-header-nav-link:hover {
           background: rgba(255, 255, 255, 0.1);
         }
 
-        .nav-link.register {
+        .app-header-register {
           background: #4caf50;
           color: white;
         }
 
-        .nav-link.register:hover {
+        .app-header-register:hover {
           background: #45a049;
         }
       </style>
@@ -1315,53 +1321,57 @@ class LoginForm extends LitElement {
 
   render() {
     return html`
-      <form class="login-form" @submit=${this.handleSubmit}>
-        <div class="form-group">
-          <label for="email">Email</label>
+      <form class="login-form-container" @submit=${this.handleSubmit}>
+        <div class="login-form-group">
+          <label for="email" class="login-form-label">Email</label>
           <input
             type="email"
             id="email"
             name="email"
             required
             placeholder="Enter your email"
+            class="login-form-input"
           />
         </div>
 
-        <div class="form-group">
-          <label for="password">Password</label>
+        <div class="login-form-group">
+          <label for="password" class="login-form-label">Password</label>
           <input
             type="password"
             id="password"
             name="password"
             required
             placeholder="Enter your password"
+            class="login-form-input"
           />
         </div>
 
-        ${this.error ? html`<div class="error">${this.error}</div>` : ""}
+        ${this.error
+          ? html`<div class="login-form-error">${this.error}</div>`
+          : ""}
 
-        <button type="submit" ?disabled=${this.loading}>
+        <button type="submit" ?disabled=${this.loading} class="login-form-btn">
           ${this.loading ? "Signing in..." : "Sign In"}
         </button>
       </form>
 
       <style>
-        .login-form {
+        .login-form-container {
           width: 100%;
         }
 
-        .form-group {
+        .login-form-group {
           margin-bottom: 1rem;
         }
 
-        .form-group label {
+        .login-form-label {
           display: block;
           margin-bottom: 0.5rem;
           font-weight: 500;
           color: #333;
         }
 
-        .form-group input {
+        .login-form-input {
           width: 100%;
           padding: 0.75rem;
           border: 1px solid #ddd;
@@ -1370,13 +1380,13 @@ class LoginForm extends LitElement {
           transition: border-color 0.3s;
         }
 
-        .form-group input:focus {
+        .login-form-input:focus {
           outline: none;
           border-color: #667eea;
           box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
         }
 
-        .error {
+        .login-form-error {
           color: #e74c3c;
           margin: 1rem 0;
           padding: 0.75rem;
@@ -1386,7 +1396,7 @@ class LoginForm extends LitElement {
           font-size: 0.9rem;
         }
 
-        button {
+        .login-form-btn {
           width: 100%;
           padding: 0.75rem;
           background: #667eea;
@@ -1399,11 +1409,11 @@ class LoginForm extends LitElement {
           transition: background-color 0.3s;
         }
 
-        button:hover:not(:disabled) {
+        .login-form-btn:hover:not(:disabled) {
           background: #5a6fd8;
         }
 
-        button:disabled {
+        .login-form-btn:disabled {
           opacity: 0.6;
           cursor: not-allowed;
         }
@@ -1481,31 +1491,33 @@ class RegisterForm extends LitElement {
 
   render() {
     return html`
-      <form class="register-form" @submit=${this.handleSubmit}>
-        <div class="form-group">
-          <label for="name">Full Name</label>
+      <form class="register-form-container" @submit=${this.handleSubmit}>
+        <div class="register-form-group">
+          <label for="name" class="register-form-label">Full Name</label>
           <input
             type="text"
             id="name"
             name="name"
             required
             placeholder="Enter your full name"
+            class="register-form-input"
           />
         </div>
 
-        <div class="form-group">
-          <label for="email">Email</label>
+        <div class="register-form-group">
+          <label for="email" class="register-form-label">Email</label>
           <input
             type="email"
             id="email"
             name="email"
             required
             placeholder="Enter your email"
+            class="register-form-input"
           />
         </div>
 
-        <div class="form-group">
-          <label for="password">Password</label>
+        <div class="register-form-group">
+          <label for="password" class="register-form-label">Password</label>
           <input
             type="password"
             id="password"
@@ -1513,33 +1525,40 @@ class RegisterForm extends LitElement {
             required
             placeholder="Enter a password (min 6 characters)"
             minlength="6"
+            class="register-form-input"
           />
         </div>
 
-        ${this.error ? html`<div class="error">${this.error}</div>` : ""}
+        ${this.error
+          ? html`<div class="register-form-error">${this.error}</div>`
+          : ""}
 
-        <button type="submit" ?disabled=${this.loading}>
+        <button
+          type="submit"
+          ?disabled=${this.loading}
+          class="register-form-btn"
+        >
           ${this.loading ? "Creating account..." : "Create Account"}
         </button>
       </form>
 
       <style>
-        .register-form {
+        .register-form-container {
           width: 100%;
         }
 
-        .form-group {
+        .register-form-group {
           margin-bottom: 1rem;
         }
 
-        .form-group label {
+        .register-form-label {
           display: block;
           margin-bottom: 0.5rem;
           font-weight: 500;
           color: #333;
         }
 
-        .form-group input {
+        .register-form-input {
           width: 100%;
           padding: 0.75rem;
           border: 1px solid #ddd;
@@ -1548,13 +1567,13 @@ class RegisterForm extends LitElement {
           transition: border-color 0.3s;
         }
 
-        .form-group input:focus {
+        .register-form-input:focus {
           outline: none;
           border-color: #667eea;
           box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
         }
 
-        .error {
+        .register-form-error {
           color: #e74c3c;
           margin: 1rem 0;
           padding: 0.75rem;
@@ -1564,7 +1583,7 @@ class RegisterForm extends LitElement {
           font-size: 0.9rem;
         }
 
-        button {
+        .register-form-btn {
           width: 100%;
           padding: 0.75rem;
           background: #667eea;
@@ -1577,11 +1596,11 @@ class RegisterForm extends LitElement {
           transition: background-color 0.3s;
         }
 
-        button:hover:not(:disabled) {
+        .register-form-btn:hover:not(:disabled) {
           background: #5a6fd8;
         }
 
-        button:disabled {
+        .register-form-btn:disabled {
           opacity: 0.6;
           cursor: not-allowed;
         }
@@ -1888,15 +1907,27 @@ REFRESH_TOKEN_EXPIRE_SECONDS=300   # 5 minutes
 - Centralized auth methods for consistency
 - **Minimal base template** - no global styles or structures
 - **Page-specific styling** - styles belong where they're used
-- **Component-scoped styles** - Lit.js components handle their own styling
+- **Component-scoped styles** - Lit.js components with prefixed CSS classes
+
+### 6. No Shadow DOM CSS Conflicts
+
+Since we disable Shadow DOM to access global styles (Font Awesome icons), all component CSS classes **must be prefixed** with the component name:
+
+- ✅ **app-header** → `.app-header-container`, `.app-header-nav-link`, etc.
+- ✅ **login-form** → `.login-form-container`, `.login-form-group`, `.login-form-btn`, etc.
+- ✅ **register-form** → `.register-form-container`, `.register-form-group`, `.register-form-btn`, etc.
+- ✅ **google-signin-button** → `.google-signin-btn` (already correctly named)
+
+This prevents CSS conflicts between components while maintaining access to global icon libraries.
 
 ## 🎉 Summary
 
 Flash Feather v2.4 provides a complete, modern web framework with:
 
+- ✅ **Component-prefixed CSS classes** preventing conflicts without Shadow DOM
 - ✅ **Truly minimal base template** with only essential structure
 - ✅ **Page-specific styling** properly organized in individual templates
-- ✅ **Component-scoped styles** in Lit.js components
+- ✅ **Component-scoped styles** in Lit.js components with proper naming
 - ✅ **Centralized authentication system** with clean service methods
 - ✅ **Seamless token refresh** for uninterrupted user experience
 - ✅ **Server-side control** following Flash Feather principles
