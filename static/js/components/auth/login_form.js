@@ -53,50 +53,57 @@ class LoginForm extends LitElement {
 
   render() {
     return html`
-      <form class="login-form" @submit=${this.handleSubmit}>
-        <div class="form-group">
-          <label for="email">Email</label>
+      <form class="login-form-container" @submit=${this.handleSubmit}>
+        <div class="login-form-group">
+          <label for="email" class="login-form-label">Email</label>
           <input
             type="email"
             id="email"
             name="email"
             required
             placeholder="Enter your email"
+            class="login-form-input"
           />
         </div>
 
-        <div class="form-group">
-          <label for="password">Password</label>
+        <div class="login-form-group">
+          <label for="password" class="login-form-label">Password</label>
           <input
             type="password"
             id="password"
             name="password"
             required
             placeholder="Enter your password"
+            class="login-form-input"
           />
         </div>
 
-        ${this.error ? html`<div class="error">${this.error}</div>` : ""}
+        ${this.error
+          ? html`<div class="login-form-error">${this.error}</div>`
+          : ""}
 
-        <button type="submit" ?disabled=${this.loading}>
+        <button type="submit" ?disabled=${this.loading} class="login-form-btn">
           ${this.loading ? "Signing in..." : "Sign In"}
         </button>
       </form>
 
       <style>
-        .login-form {
+        .login-form-container {
           width: 100%;
         }
-        .form-group {
+
+        .login-form-group {
           margin-bottom: 1rem;
         }
-        .form-group label {
+
+        .login-form-label {
           display: block;
           margin-bottom: 0.5rem;
           font-weight: 500;
           color: #333;
         }
-        .form-group input {
+
+        .login-form-input {
           width: 100%;
           padding: 0.75rem;
           border: 1px solid #ddd;
@@ -104,12 +111,14 @@ class LoginForm extends LitElement {
           font-size: 1rem;
           transition: border-color 0.3s;
         }
-        .form-group input:focus {
+
+        .login-form-input:focus {
           outline: none;
           border-color: #667eea;
           box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
         }
-        .error {
+
+        .login-form-error {
           color: #e74c3c;
           margin: 1rem 0;
           padding: 0.75rem;
@@ -118,7 +127,8 @@ class LoginForm extends LitElement {
           border-radius: 4px;
           font-size: 0.9rem;
         }
-        button {
+
+        .login-form-btn {
           width: 100%;
           padding: 0.75rem;
           background: #667eea;
@@ -130,10 +140,12 @@ class LoginForm extends LitElement {
           cursor: pointer;
           transition: background-color 0.3s;
         }
-        button:hover:not(:disabled) {
+
+        .login-form-btn:hover:not(:disabled) {
           background: #5a6fd8;
         }
-        button:disabled {
+
+        .login-form-btn:disabled {
           opacity: 0.6;
           cursor: not-allowed;
         }

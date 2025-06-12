@@ -60,22 +60,24 @@ class AppHeader extends LitElement {
 
   render() {
     return html`
-      <header class="app-header">
-        <div class="header-container">
-          <div class="logo">
-            <a href="/">
+      <header class="app-header-container">
+        <div class="app-header-wrapper">
+          <div class="app-header-logo">
+            <a href="/" class="app-header-logo-link">
               <i class="fas fa-feather-alt"></i>
               Flash Feather
             </a>
           </div>
 
-          <nav class="header-nav">
+          <nav class="app-header-nav">
             ${this.user
               ? html`
-                  <div class="user-menu">
-                    <span class="user-name">Hello, ${this.user.name}!</span>
+                  <div class="app-header-user-menu">
+                    <span class="app-header-user-name"
+                      >Hello, ${this.user.name}!</span
+                    >
                     <button
-                      class="logout-btn"
+                      class="app-header-logout-btn"
                       @click=${this.handleLogout}
                       ?disabled=${this.loading}
                     >
@@ -84,9 +86,13 @@ class AppHeader extends LitElement {
                   </div>
                 `
               : html`
-                  <div class="auth-links">
-                    <a href="/login" class="nav-link">Login</a>
-                    <a href="/register" class="nav-link register">Register</a>
+                  <div class="app-header-auth-links">
+                    <a href="/login" class="app-header-nav-link">Login</a>
+                    <a
+                      href="/register"
+                      class="app-header-nav-link app-header-register"
+                      >Register</a
+                    >
                   </div>
                 `}
           </nav>
@@ -94,12 +100,13 @@ class AppHeader extends LitElement {
       </header>
 
       <style>
-        .app-header {
+        .app-header-container {
           background: rgba(255, 255, 255, 0.1);
           backdrop-filter: blur(10px);
           border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
-        .header-container {
+
+        .app-header-wrapper {
           max-width: 1200px;
           margin: 0 auto;
           padding: 1rem 2rem;
@@ -107,7 +114,8 @@ class AppHeader extends LitElement {
           justify-content: space-between;
           align-items: center;
         }
-        .logo a {
+
+        .app-header-logo-link {
           color: white;
           text-decoration: none;
           font-size: 1.5rem;
@@ -116,19 +124,23 @@ class AppHeader extends LitElement {
           align-items: center;
           gap: 0.5rem;
         }
-        .logo i {
+
+        .app-header-logo-link i {
           color: #4caf50;
         }
-        .user-menu {
+
+        .app-header-user-menu {
           display: flex;
           align-items: center;
           gap: 1rem;
         }
-        .user-name {
+
+        .app-header-user-name {
           color: white;
           font-weight: 500;
         }
-        .logout-btn {
+
+        .app-header-logout-btn {
           background: rgba(255, 255, 255, 0.2);
           color: white;
           border: 1px solid rgba(255, 255, 255, 0.3);
@@ -137,32 +149,39 @@ class AppHeader extends LitElement {
           cursor: pointer;
           transition: all 0.3s;
         }
-        .logout-btn:hover:not(:disabled) {
+
+        .app-header-logout-btn:hover:not(:disabled) {
           background: rgba(255, 255, 255, 0.3);
         }
-        .logout-btn:disabled {
+
+        .app-header-logout-btn:disabled {
           opacity: 0.6;
           cursor: not-allowed;
         }
-        .auth-links {
+
+        .app-header-auth-links {
           display: flex;
           gap: 1rem;
         }
-        .nav-link {
+
+        .app-header-nav-link {
           color: white;
           text-decoration: none;
           padding: 0.5rem 1rem;
           border-radius: 4px;
           transition: all 0.3s;
         }
-        .nav-link:hover {
+
+        .app-header-nav-link:hover {
           background: rgba(255, 255, 255, 0.1);
         }
-        .nav-link.register {
+
+        .app-header-register {
           background: #4caf50;
           color: white;
         }
-        .nav-link.register:hover {
+
+        .app-header-register:hover {
           background: #45a049;
         }
       </style>

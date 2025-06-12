@@ -61,31 +61,33 @@ class RegisterForm extends LitElement {
 
   render() {
     return html`
-      <form class="register-form" @submit=${this.handleSubmit}>
-        <div class="form-group">
-          <label for="name">Full Name</label>
+      <form class="register-form-container" @submit=${this.handleSubmit}>
+        <div class="register-form-group">
+          <label for="name" class="register-form-label">Full Name</label>
           <input
             type="text"
             id="name"
             name="name"
             required
             placeholder="Enter your full name"
+            class="register-form-input"
           />
         </div>
 
-        <div class="form-group">
-          <label for="email">Email</label>
+        <div class="register-form-group">
+          <label for="email" class="register-form-label">Email</label>
           <input
             type="email"
             id="email"
             name="email"
             required
             placeholder="Enter your email"
+            class="register-form-input"
           />
         </div>
 
-        <div class="form-group">
-          <label for="password">Password</label>
+        <div class="register-form-group">
+          <label for="password" class="register-form-label">Password</label>
           <input
             type="password"
             id="password"
@@ -93,30 +95,40 @@ class RegisterForm extends LitElement {
             required
             placeholder="Enter a password (min 6 characters)"
             minlength="6"
+            class="register-form-input"
           />
         </div>
 
-        ${this.error ? html`<div class="error">${this.error}</div>` : ""}
+        ${this.error
+          ? html`<div class="register-form-error">${this.error}</div>`
+          : ""}
 
-        <button type="submit" ?disabled=${this.loading}>
+        <button
+          type="submit"
+          ?disabled=${this.loading}
+          class="register-form-btn"
+        >
           ${this.loading ? "Creating account..." : "Create Account"}
         </button>
       </form>
 
       <style>
-        .register-form {
+        .register-form-container {
           width: 100%;
         }
-        .form-group {
+
+        .register-form-group {
           margin-bottom: 1rem;
         }
-        .form-group label {
+
+        .register-form-label {
           display: block;
           margin-bottom: 0.5rem;
           font-weight: 500;
           color: #333;
         }
-        .form-group input {
+
+        .register-form-input {
           width: 100%;
           padding: 0.75rem;
           border: 1px solid #ddd;
@@ -124,12 +136,14 @@ class RegisterForm extends LitElement {
           font-size: 1rem;
           transition: border-color 0.3s;
         }
-        .form-group input:focus {
+
+        .register-form-input:focus {
           outline: none;
           border-color: #667eea;
           box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
         }
-        .error {
+
+        .register-form-error {
           color: #e74c3c;
           margin: 1rem 0;
           padding: 0.75rem;
@@ -138,7 +152,8 @@ class RegisterForm extends LitElement {
           border-radius: 4px;
           font-size: 0.9rem;
         }
-        button {
+
+        .register-form-btn {
           width: 100%;
           padding: 0.75rem;
           background: #667eea;
@@ -150,10 +165,12 @@ class RegisterForm extends LitElement {
           cursor: pointer;
           transition: background-color 0.3s;
         }
-        button:hover:not(:disabled) {
+
+        .register-form-btn:hover:not(:disabled) {
           background: #5a6fd8;
         }
-        button:disabled {
+
+        .register-form-btn:disabled {
           opacity: 0.6;
           cursor: not-allowed;
         }
