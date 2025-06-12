@@ -780,7 +780,7 @@ async def logout(response: Response):
 
 ## 🎨 Frontend Templates
 
-### Base Template
+### Base Template (Minimal)
 
 **`app/templates/base.html`**
 
@@ -792,7 +792,7 @@ async def logout(response: Response):
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}Flash Feather App{% endblock %}</title>
 
-    <!-- External resources -->
+    <!-- External resources only -->
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
       rel="stylesheet"
@@ -802,54 +802,6 @@ async def logout(response: Response):
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
 
-    <!-- Base styles -->
-    <style>
-      * {
-        box-sizing: border-box;
-      }
-      body {
-        margin: 0;
-        font-family: "Roboto", sans-serif;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        min-height: 100vh;
-      }
-      .auth-container {
-        max-width: 400px;
-        margin: 2rem auto;
-        padding: 2rem;
-        background: white;
-        border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      }
-      .auth-container h1 {
-        text-align: center;
-        color: #333;
-        margin-bottom: 2rem;
-      }
-      .divider {
-        text-align: center;
-        margin: 1.5rem 0;
-        color: #666;
-        position: relative;
-      }
-      .divider:before {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 0;
-        right: 0;
-        height: 1px;
-        background: #ddd;
-        z-index: 1;
-      }
-      .divider span {
-        background: white;
-        padding: 0 1rem;
-        position: relative;
-        z-index: 2;
-      }
-    </style>
-
     <!-- Page-specific module imports -->
     <script type="module">
       {% block module_imports %}{% endblock %}
@@ -857,7 +809,6 @@ async def logout(response: Response):
   </head>
   <body>
     <main>{% block content %}{% endblock %}</main>
-
     {% block scripts %}{% endblock %}
   </body>
 </html>
@@ -884,47 +835,39 @@ block module_imports %} import '/static/js/components/global/app_header.js?v=1';
 </div>
 
 <style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+  }
+
   .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem;
   }
+
   .hero {
     text-align: center;
     color: white;
     padding: 4rem 0;
   }
+
   .hero h1 {
     font-size: 3rem;
     margin-bottom: 1rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   }
+
   .hero p {
     font-size: 1.2rem;
     margin-bottom: 3rem;
     opacity: 0.9;
-  }
-  .btn {
-    display: inline-block;
-    padding: 1rem 2rem;
-    margin: 0 0.5rem;
-    text-decoration: none;
-    border-radius: 4px;
-    font-weight: 500;
-    transition: all 0.3s;
-  }
-  .btn.primary {
-    background: #4caf50;
-    color: white;
-  }
-  .btn.secondary {
-    background: transparent;
-    color: white;
-    border: 2px solid white;
-  }
-  .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
 </style>
 {% endblock %}
@@ -952,17 +895,71 @@ block content %}
 </div>
 
 <style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+  }
+
+  .auth-container {
+    max-width: 400px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .auth-container h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 2rem;
+  }
+
+  .divider {
+    text-align: center;
+    margin: 1.5rem 0;
+    color: #666;
+    position: relative;
+  }
+
+  .divider:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #ddd;
+    z-index: 1;
+  }
+
+  .divider span {
+    background: white;
+    padding: 0 1rem;
+    position: relative;
+    z-index: 2;
+  }
+
   .auth-links {
     text-align: center;
     margin-top: 2rem;
   }
+
   .auth-links p {
     margin: 0.5rem 0;
   }
+
   .auth-links a {
     color: #667eea;
     text-decoration: none;
   }
+
   .auth-links a:hover {
     text-decoration: underline;
   }
@@ -991,17 +988,71 @@ content %}
 </div>
 
 <style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+  }
+
+  .auth-container {
+    max-width: 400px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .auth-container h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 2rem;
+  }
+
+  .divider {
+    text-align: center;
+    margin: 1.5rem 0;
+    color: #666;
+    position: relative;
+  }
+
+  .divider:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #ddd;
+    z-index: 1;
+  }
+
+  .divider span {
+    background: white;
+    padding: 0 1rem;
+    position: relative;
+    z-index: 2;
+  }
+
   .auth-links {
     text-align: center;
     margin-top: 2rem;
   }
+
   .auth-links p {
     margin: 0.5rem 0;
   }
+
   .auth-links a {
     color: #667eea;
     text-decoration: none;
   }
+
   .auth-links a:hover {
     text-decoration: underline;
   }
@@ -1117,6 +1168,7 @@ class AppHeader extends LitElement {
           backdrop-filter: blur(10px);
           border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
+
         .header-container {
           max-width: 1200px;
           margin: 0 auto;
@@ -1125,6 +1177,7 @@ class AppHeader extends LitElement {
           justify-content: space-between;
           align-items: center;
         }
+
         .logo a {
           color: white;
           text-decoration: none;
@@ -1134,18 +1187,22 @@ class AppHeader extends LitElement {
           align-items: center;
           gap: 0.5rem;
         }
+
         .logo i {
           color: #4caf50;
         }
+
         .user-menu {
           display: flex;
           align-items: center;
           gap: 1rem;
         }
+
         .user-name {
           color: white;
           font-weight: 500;
         }
+
         .logout-btn {
           background: rgba(255, 255, 255, 0.2);
           color: white;
@@ -1155,17 +1212,21 @@ class AppHeader extends LitElement {
           cursor: pointer;
           transition: all 0.3s;
         }
+
         .logout-btn:hover:not(:disabled) {
           background: rgba(255, 255, 255, 0.3);
         }
+
         .logout-btn:disabled {
           opacity: 0.6;
           cursor: not-allowed;
         }
+
         .auth-links {
           display: flex;
           gap: 1rem;
         }
+
         .nav-link {
           color: white;
           text-decoration: none;
@@ -1173,13 +1234,16 @@ class AppHeader extends LitElement {
           border-radius: 4px;
           transition: all 0.3s;
         }
+
         .nav-link:hover {
           background: rgba(255, 255, 255, 0.1);
         }
+
         .nav-link.register {
           background: #4caf50;
           color: white;
         }
+
         .nav-link.register:hover {
           background: #45a049;
         }
@@ -1285,15 +1349,18 @@ class LoginForm extends LitElement {
         .login-form {
           width: 100%;
         }
+
         .form-group {
           margin-bottom: 1rem;
         }
+
         .form-group label {
           display: block;
           margin-bottom: 0.5rem;
           font-weight: 500;
           color: #333;
         }
+
         .form-group input {
           width: 100%;
           padding: 0.75rem;
@@ -1302,11 +1369,13 @@ class LoginForm extends LitElement {
           font-size: 1rem;
           transition: border-color 0.3s;
         }
+
         .form-group input:focus {
           outline: none;
           border-color: #667eea;
           box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
         }
+
         .error {
           color: #e74c3c;
           margin: 1rem 0;
@@ -1316,6 +1385,7 @@ class LoginForm extends LitElement {
           border-radius: 4px;
           font-size: 0.9rem;
         }
+
         button {
           width: 100%;
           padding: 0.75rem;
@@ -1328,9 +1398,11 @@ class LoginForm extends LitElement {
           cursor: pointer;
           transition: background-color 0.3s;
         }
+
         button:hover:not(:disabled) {
           background: #5a6fd8;
         }
+
         button:disabled {
           opacity: 0.6;
           cursor: not-allowed;
@@ -1455,15 +1527,18 @@ class RegisterForm extends LitElement {
         .register-form {
           width: 100%;
         }
+
         .form-group {
           margin-bottom: 1rem;
         }
+
         .form-group label {
           display: block;
           margin-bottom: 0.5rem;
           font-weight: 500;
           color: #333;
         }
+
         .form-group input {
           width: 100%;
           padding: 0.75rem;
@@ -1472,11 +1547,13 @@ class RegisterForm extends LitElement {
           font-size: 1rem;
           transition: border-color 0.3s;
         }
+
         .form-group input:focus {
           outline: none;
           border-color: #667eea;
           box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
         }
+
         .error {
           color: #e74c3c;
           margin: 1rem 0;
@@ -1486,6 +1563,7 @@ class RegisterForm extends LitElement {
           border-radius: 4px;
           font-size: 0.9rem;
         }
+
         button {
           width: 100%;
           padding: 0.75rem;
@@ -1498,9 +1576,11 @@ class RegisterForm extends LitElement {
           cursor: pointer;
           transition: background-color 0.3s;
         }
+
         button:hover:not(:disabled) {
           background: #5a6fd8;
         }
+
         button:disabled {
           opacity: 0.6;
           cursor: not-allowed;
@@ -1806,20 +1886,23 @@ REFRESH_TOKEN_EXPIRE_SECONDS=300   # 5 minutes
 - API routes separated from schemas
 - Business logic in service layers
 - Centralized auth methods for consistency
-- No unnecessary imports or dependencies
+- **Minimal base template** - no global styles or structures
+- **Page-specific styling** - styles belong where they're used
+- **Component-scoped styles** - Lit.js components handle their own styling
 
 ## 🎉 Summary
 
 Flash Feather v2.4 provides a complete, modern web framework with:
 
+- ✅ **Truly minimal base template** with only essential structure
+- ✅ **Page-specific styling** properly organized in individual templates
+- ✅ **Component-scoped styles** in Lit.js components
 - ✅ **Centralized authentication system** with clean service methods
-- ✅ **Improved code organization** with consolidated auth services
 - ✅ **Seamless token refresh** for uninterrupted user experience
 - ✅ **Server-side control** following Flash Feather principles
 - ✅ **Environment-aware architecture** for development and production
-- ✅ **Clean code organization** with separated concerns
+- ✅ **Clean separation of concerns** with proper style organization
 - ✅ **Modern Python practices** with updated deprecation fixes
-- ✅ **Minimal, secure frontend** with Lit.js components
 - ✅ **Production-ready deployment** with data persistence
 
 **Perfect for building modern web applications with AI assistance!** 🚀

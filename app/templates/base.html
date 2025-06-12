@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}Flash Feather App{% endblock %}</title>
 
-    <!-- External resources -->
+    <!-- External resources only -->
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
       rel="stylesheet"
@@ -15,54 +15,6 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
 
-    <!-- Base styles -->
-    <style>
-      * {
-        box-sizing: border-box;
-      }
-      body {
-        margin: 0;
-        font-family: "Roboto", sans-serif;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        min-height: 100vh;
-      }
-      .auth-container {
-        max-width: 400px;
-        margin: 2rem auto;
-        padding: 2rem;
-        background: white;
-        border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      }
-      .auth-container h1 {
-        text-align: center;
-        color: #333;
-        margin-bottom: 2rem;
-      }
-      .divider {
-        text-align: center;
-        margin: 1.5rem 0;
-        color: #666;
-        position: relative;
-      }
-      .divider:before {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 0;
-        right: 0;
-        height: 1px;
-        background: #ddd;
-        z-index: 1;
-      }
-      .divider span {
-        background: white;
-        padding: 0 1rem;
-        position: relative;
-        z-index: 2;
-      }
-    </style>
-
     <!-- Page-specific module imports -->
     <script type="module">
       {% block module_imports %}{% endblock %}
@@ -70,7 +22,6 @@
   </head>
   <body>
     <main>{% block content %}{% endblock %}</main>
-
     {% block scripts %}{% endblock %}
   </body>
 </html>

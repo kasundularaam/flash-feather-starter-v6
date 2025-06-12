@@ -15,17 +15,71 @@ block content %}
 </div>
 
 <style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+  }
+
+  .auth-container {
+    max-width: 400px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .auth-container h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 2rem;
+  }
+
+  .divider {
+    text-align: center;
+    margin: 1.5rem 0;
+    color: #666;
+    position: relative;
+  }
+
+  .divider:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #ddd;
+    z-index: 1;
+  }
+
+  .divider span {
+    background: white;
+    padding: 0 1rem;
+    position: relative;
+    z-index: 2;
+  }
+
   .auth-links {
     text-align: center;
     margin-top: 2rem;
   }
+
   .auth-links p {
     margin: 0.5rem 0;
   }
+
   .auth-links a {
     color: #667eea;
     text-decoration: none;
   }
+
   .auth-links a:hover {
     text-decoration: underline;
   }
