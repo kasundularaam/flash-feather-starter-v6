@@ -14,7 +14,7 @@ class RegisterForm extends LitElement {
     this.error = "";
   }
 
-  // Disable Shadow DOM for global styles
+  // Disable Shadow DOM for semantic styles
   createRenderRoot() {
     return this;
   }
@@ -46,7 +46,6 @@ class RegisterForm extends LitElement {
       });
 
       if (response.ok) {
-        // Cookies are set automatically by the server
         window.location.href = "/";
       } else {
         const error = await response.json();
@@ -61,120 +60,60 @@ class RegisterForm extends LitElement {
 
   render() {
     return html`
-      <form class="register-form-container" @submit=${this.handleSubmit}>
-        <div class="register-form-group">
-          <label for="name" class="register-form-label">Full Name</label>
+      <form @submit=${this.handleSubmit}>
+        <div class="form-group">
+          <label for="register-name">Full Name</label>
           <input
             type="text"
-            id="name"
+            id="register-name"
             name="name"
             required
             placeholder="Enter your full name"
-            class="register-form-input"
+            ?disabled=${this.loading}
           />
         </div>
 
-        <div class="register-form-group">
-          <label for="email" class="register-form-label">Email</label>
+        <div class="form-group">
+          <label for="register-email">Email</label>
           <input
             type="email"
-            id="email"
+            id="register-email"
             name="email"
             required
             placeholder="Enter your email"
-            class="register-form-input"
+            ?disabled=${this.loading}
           />
         </div>
 
-        <div class="register-form-group">
-          <label for="password" class="register-form-label">Password</label>
+        <div class="form-group">
+          <label for="register-password">Password</label>
           <input
             type="password"
-            id="password"
+            id="register-password"
             name="password"
             required
             placeholder="Enter a password (min 6 characters)"
             minlength="6"
-            class="register-form-input"
+            ?disabled=${this.loading}
           />
+          <small>Must be at least 6 characters long</small>
         </div>
 
         ${this.error
-          ? html`<div class="register-form-error">${this.error}</div>`
+          ? html`<div class="error-message">
+              <i class="fas fa-exclamation-circle"></i>
+              ${this.error}
+            </div>`
           : ""}
 
-        <button
-          type="submit"
-          ?disabled=${this.loading}
-          class="register-form-btn"
-        >
-          ${this.loading ? "Creating account..." : "Create Account"}
-        </button>
+        <div class="form-group">
+          <button type="submit" ?disabled=${this.loading}>
+            ${this.loading
+              ? html`<i class="fas fa-spinner fa-spin"></i> Creating account...`
+              : html`<i class="fas fa-user-plus"></i> Create Account`}
+          </button>
+        </div>
       </form>
-
-      <style>
-        .register-form-container {
-          width: 100%;
-        }
-
-        .register-form-group {
-          margin-bottom: 1rem;
-        }
-
-        .register-form-label {
-          display: block;
-          margin-bottom: 0.5rem;
-          font-weight: 500;
-          color: #333;
-        }
-
-        .register-form-input {
-          width: 100%;
-          padding: 0.75rem;
-          border: 1px solid #ddd;
-          border-radius: 4px;
-          font-size: 1rem;
-          transition: border-color 0.3s;
-        }
-
-        .register-form-input:focus {
-          outline: none;
-          border-color: #667eea;
-          box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
-        }
-
-        .register-form-error {
-          color: #e74c3c;
-          margin: 1rem 0;
-          padding: 0.75rem;
-          background: #fdf2f2;
-          border: 1px solid #f5c6cb;
-          border-radius: 4px;
-          font-size: 0.9rem;
-        }
-
-        .register-form-btn {
-          width: 100%;
-          padding: 0.75rem;
-          background: #667eea;
-          color: white;
-          border: none;
-          border-radius: 4px;
-          font-size: 1rem;
-          font-weight: 500;
-          cursor: pointer;
-          transition: background-color 0.3s;
-        }
-
-        .register-form-btn:hover:not(:disabled) {
-          background: #5a6fd8;
-        }
-
-        .register-form-btn:disabled {
-          opacity: 0.6;
-          cursor: not-allowed;
-        }
-      </style>
     `;
   }
 }

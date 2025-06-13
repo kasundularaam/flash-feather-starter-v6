@@ -1,0 +1,276 @@
+{% extends "base.html" %} {% block title %}Demo - Flash Feather Semantic
+Styles{% endblock %} {% block content %}
+<div class="container">
+  <header class="text-center">
+    <h1>Flash Feather Semantic Styles</h1>
+    <p>Beautiful UI with zero configuration - just write semantic HTML!</p>
+    <a href="/">← Back to Home</a>
+  </header>
+
+  <section>
+    <h2>Typography</h2>
+    <article>
+      <h1>Heading 1 - Playfair Display</h1>
+      <h2>Heading 2 - Elegant serif</h2>
+      <h3>Heading 3 - Perfect for sections</h3>
+      <h4>Heading 4 - Subsections</h4>
+      <h5>Heading 5 - Minor headings</h5>
+      <h6>Heading 6 - Small headings</h6>
+
+      <p>
+        This is a paragraph with <strong>bold text</strong> and
+        <em>italic text</em>. Here's a <a href="#">link example</a> that shows
+        our accent color in action.
+      </p>
+
+      <p><small>This is small text for metadata and disclaimers.</small></p>
+
+      <p>Inline code looks like this: <code>const hello = "world";</code></p>
+
+      <pre><code>// Code block example
+function greet(name) {
+  return `Hello, ${name}!`;
+}
+
+console.log(greet("Flash Feather"));</code></pre>
+    </article>
+  </section>
+
+  <section>
+    <h2>Buttons</h2>
+    <article>
+      <h3>Button Variants</h3>
+      <div class="flex" style="flex-wrap: wrap">
+        <button>Primary Button</button>
+        <button data-variant="secondary">Secondary Button</button>
+        <button data-variant="ghost">Ghost Button</button>
+        <button disabled>Disabled Button</button>
+      </div>
+
+      <h3>Button Types</h3>
+      <div class="flex" style="flex-wrap: wrap">
+        <button type="submit">Submit Button</button>
+        <button type="button">Regular Button</button>
+        <button type="reset">Reset Button</button>
+      </div>
+
+      <h3>Links as Buttons</h3>
+      <div class="flex" style="flex-wrap: wrap">
+        <a href="#" role="button">Link Button</a>
+        <a href="#" role="button" data-variant="secondary">Secondary Link</a>
+        <a href="#" role="button" data-variant="ghost">Ghost Link</a>
+      </div>
+    </article>
+  </section>
+
+  <section>
+    <h2>Forms</h2>
+    <article>
+      <form>
+        <div class="form-group">
+          <label for="demo-text">Text Input</label>
+          <input type="text" id="demo-text" placeholder="Enter some text" />
+        </div>
+
+        <div class="form-group">
+          <label for="demo-email">Email Input</label>
+          <input type="email" id="demo-email" placeholder="your@email.com" />
+        </div>
+
+        <div class="form-group">
+          <label for="demo-password">Password Input</label>
+          <input
+            type="password"
+            id="demo-password"
+            placeholder="Your password"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="demo-select">Select Dropdown</label>
+          <select id="demo-select">
+            <option>Choose an option</option>
+            <option>Option 1</option>
+            <option>Option 2</option>
+            <option>Option 3</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="demo-textarea">Textarea</label>
+          <textarea
+            id="demo-textarea"
+            placeholder="Enter a longer message here..."
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label> <input type="checkbox" /> Check this box </label>
+        </div>
+
+        <div class="form-group">
+          <label>
+            <input type="radio" name="demo-radio" /> Radio option 1
+          </label>
+          <label>
+            <input type="radio" name="demo-radio" /> Radio option 2
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label for="demo-error">Input with Error State</label>
+          <input
+            type="text"
+            id="demo-error"
+            data-state="error"
+            placeholder="This has an error"
+          />
+          <div class="error-message">This field is required</div>
+        </div>
+
+        <div class="form-group">
+          <label for="demo-success">Input with Success State</label>
+          <input
+            type="text"
+            id="demo-success"
+            data-state="success"
+            value="This looks good!"
+          />
+          <div class="success-message">Perfect!</div>
+        </div>
+
+        <div class="flex">
+          <button type="submit">Submit Form</button>
+          <button type="reset" data-variant="secondary">Reset</button>
+        </div>
+      </form>
+    </article>
+  </section>
+
+  <section>
+    <h2>Lists</h2>
+    <article>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem">
+        <div>
+          <h3>Unordered List</h3>
+          <ul>
+            <li>First item</li>
+            <li>Second item with more text to show wrapping</li>
+            <li>Third item</li>
+            <li>
+              Nested list item
+              <ul>
+                <li>Nested item 1</li>
+                <li>Nested item 2</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Ordered List</h3>
+          <ol>
+            <li>First step</li>
+            <li>Second step</li>
+            <li>Third step</li>
+            <li>Final step</li>
+          </ol>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section>
+    <h2>Navigation</h2>
+    <article>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/services">Services</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </nav>
+    </article>
+  </section>
+
+  <section>
+    <h2>Tables</h2>
+    <article>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Flash Feather</th>
+            <th>Traditional</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Setup Time</td>
+            <td>5 minutes</td>
+            <td>Hours</td>
+          </tr>
+          <tr>
+            <td>Semantic HTML</td>
+            <td>✅ Built-in</td>
+            <td>❌ Custom</td>
+          </tr>
+          <tr>
+            <td>Dark Theme</td>
+            <td>✅ Default</td>
+            <td>❌ Optional</td>
+          </tr>
+          <tr>
+            <td>Components</td>
+            <td>✅ Lit.js</td>
+            <td>⚠️ Various</td>
+          </tr>
+        </tbody>
+      </table>
+    </article>
+  </section>
+
+  <section>
+    <h2>Layout Examples</h2>
+
+    <article>
+      <h3>Article Layout</h3>
+      <p>
+        This entire page is built with semantic HTML elements. Each section uses
+        <code>&lt;article&gt;</code> tags that automatically get beautiful
+        styling.
+      </p>
+    </article>
+
+    <article>
+      <header>
+        <h3>Article with Header</h3>
+        <p>
+          This article has a header section that gets automatically styled with
+          a bottom border.
+        </p>
+      </header>
+      <p>The content flows naturally below the header. No classes needed!</p>
+    </article>
+
+    <article>
+      <h3>Flex Layout</h3>
+      <p>Use the minimal <code>.flex</code> utility for simple layouts:</p>
+      <div class="flex">
+        <button>Button 1</button>
+        <button data-variant="secondary">Button 2</button>
+        <button data-variant="ghost">Button 3</button>
+      </div>
+    </article>
+  </section>
+
+  <footer>
+    <p>
+      🚀 All of this beautiful UI comes from semantic HTML elements with zero
+      custom CSS!
+    </p>
+    <p>Just include <code>flash-feather.css</code> and start building.</p>
+  </footer>
+</div>
+{% endblock %}

@@ -3,86 +3,51 @@
 '/static/js/components/auth/register_form.js'; import
 '/static/js/components/auth/google_signin_button.js'; {% endblock %} {% block
 content %}
-<div class="auth-container">
-  <h1>Create Account</h1>
-  <register-form></register-form>
-  <div class="divider"><span>or</span></div>
-  <google-signin-button></google-signin-button>
+<div class="container" style="max-width: 400px; margin-top: 4rem">
+  <header class="text-center">
+    <h1>Create Account</h1>
+    <p>Join Flash Feather and start building</p>
+  </header>
 
-  <div class="auth-links">
+  <article>
+    <register-form></register-form>
+
+    <div
+      style="
+        text-align: center;
+        margin: 1.5rem 0;
+        color: var(--white-50);
+        position: relative;
+      "
+    >
+      <span
+        style="
+          background: var(--bg);
+          padding: 0 1rem;
+          position: relative;
+          z-index: 2;
+        "
+        >or</span
+      >
+      <div
+        style="
+          position: absolute;
+          top: 50%;
+          left: 0;
+          right: 0;
+          height: 1px;
+          background: var(--white-10);
+          z-index: 1;
+        "
+      ></div>
+    </div>
+
+    <google-signin-button></google-signin-button>
+  </article>
+
+  <footer class="text-center">
     <p>Already have an account? <a href="/login">Sign in here</a></p>
     <p><a href="/">← Back to Home</a></p>
-  </div>
+  </footer>
 </div>
-
-<style>
-  * {
-    box-sizing: border-box;
-  }
-
-  body {
-    margin: 0;
-    font-family: "Roboto", sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh;
-  }
-
-  .auth-container {
-    max-width: 400px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-
-  .auth-container h1 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 2rem;
-  }
-
-  .divider {
-    text-align: center;
-    margin: 1.5rem 0;
-    color: #666;
-    position: relative;
-  }
-
-  .divider:before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: #ddd;
-    z-index: 1;
-  }
-
-  .divider span {
-    background: white;
-    padding: 0 1rem;
-    position: relative;
-    z-index: 2;
-  }
-
-  .auth-links {
-    text-align: center;
-    margin-top: 2rem;
-  }
-
-  .auth-links p {
-    margin: 0.5rem 0;
-  }
-
-  .auth-links a {
-    color: #667eea;
-    text-decoration: none;
-  }
-
-  .auth-links a:hover {
-    text-decoration: underline;
-  }
-</style>
 {% endblock %}

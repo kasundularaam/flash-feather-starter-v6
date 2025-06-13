@@ -35,3 +35,12 @@ async def register_page(request: Request):
         "auth/register_page.html",
         {"request": request}
     )
+
+
+@router.get("/demo", response_class=HTMLResponse)
+async def demo_page(request: Request):
+    """Demo page showing semantic HTML styling"""
+    return templates.TemplateResponse(
+        "demo.html",
+        {"request": request}
+    )

@@ -4,49 +4,99 @@ block module_imports %} import '/static/js/components/global/app_header.js?v=1';
 <app-header></app-header>
 
 <div class="container">
-  <div class="hero">
-    <h1>🚀 Welcome to Flash Feather!</h1>
+  <section class="text-center">
+    <h1>🚀 Flash Feather</h1>
     <p>
       A minimal, LLM-friendly web framework combining Python FastAPI, Jinja2
       templates, and Lit.js components.
     </p>
-  </div>
+
+    <div class="flex" style="justify-content: center; margin-top: 2rem">
+      <a href="/login" data-variant="secondary">Get Started</a>
+      <a href="/demo" data-variant="secondary">See Demo</a>
+      <a href="https://github.com/your-repo/flash-feather" target="_blank">
+        <i class="fab fa-github"></i> View on GitHub
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <h2>Features</h2>
+
+    <article>
+      <h3>✨ Semantic HTML First</h3>
+      <p>
+        Write clean, semantic HTML and get beautiful UI automatically. No
+        classes needed for basic elements.
+      </p>
+
+      <pre><code>&lt;h1&gt;My App&lt;/h1&gt;
+&lt;p&gt;Beautiful by default&lt;/p&gt;
+&lt;button&gt;Click Me&lt;/button&gt;</code></pre>
+    </article>
+
+    <article>
+      <h3>🔒 Built-in Authentication</h3>
+      <p>
+        JWT cookies, automatic token refresh, Google OAuth, and secure session
+        management out of the box.
+      </p>
+
+      <ul>
+        <li>HTTP-only cookie authentication</li>
+        <li>Automatic token refresh middleware</li>
+        <li>Google OAuth integration</li>
+        <li>Server-side route protection</li>
+      </ul>
+    </article>
+
+    <article>
+      <h3>⚡ Lit.js Components</h3>
+      <p>
+        Modern web components without Shadow DOM complexity. Perfect for adding
+        interactivity to semantic HTML.
+      </p>
+
+      <div class="flex">
+        <button onclick="alert('Semantic button!')">Semantic Button</button>
+        <button data-variant="secondary">Secondary</button>
+        <button data-variant="ghost">Ghost</button>
+      </div>
+    </article>
+
+    <article>
+      <h3>🌍 Environment Aware</h3>
+      <p>
+        Automatic development/production configuration. Database and uploads
+        handled intelligently based on environment.
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Environment</th>
+            <th>Database</th>
+            <th>Uploads</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Development</td>
+            <td>./database.db</td>
+            <td>./uploads/</td>
+          </tr>
+          <tr>
+            <td>Production</td>
+            <td>/var/www/data/database.db</td>
+            <td>/var/www/data/uploads/</td>
+          </tr>
+        </tbody>
+      </table>
+    </article>
+  </section>
+
+  <footer>
+    <p>&copy; 2024 Flash Feather. Built with ❤️ for modern web development.</p>
+  </footer>
 </div>
-
-<style>
-  * {
-    box-sizing: border-box;
-  }
-
-  body {
-    margin: 0;
-    font-family: "Roboto", sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh;
-  }
-
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem;
-  }
-
-  .hero {
-    text-align: center;
-    color: white;
-    padding: 4rem 0;
-  }
-
-  .hero h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  }
-
-  .hero p {
-    font-size: 1.2rem;
-    margin-bottom: 3rem;
-    opacity: 0.9;
-  }
-</style>
 {% endblock %}
