@@ -1,8 +1,8 @@
-# Flash Feather 2.4
+# Flash Feather 2.5
 
 ## 🚀 What is Flash Feather?
 
-Flash Feather is a minimal, LLM-friendly web framework that combines Python FastAPI, Jinja2 templates, and Lit.js components. It's designed for building modern web applications with simplicity, security, and production readiness.
+Flash Feather is a minimal, LLM-friendly web framework that combines Python FastAPI, Jinja2 templates, Lit.js components, and ZURB Foundation for professional UI design. It's designed for building modern web applications with simplicity, security, and production readiness.
 
 ## 🎯 Core Philosophy
 
@@ -12,6 +12,7 @@ Flash Feather is a minimal, LLM-friendly web framework that combines Python Fast
 4. **Cookie-Based Auth**: Secure HTTP-only cookies with automatic token refresh
 5. **LLM-Friendly**: Code patterns that work well with AI assistance
 6. **Production Ready**: Built for CI/CD deployments with data persistence
+7. **Professional UI**: Foundation provides enterprise-grade design out of the box
 
 ## 🛠 Tech Stack
 
@@ -20,7 +21,7 @@ Flash Feather is a minimal, LLM-friendly web framework that combines Python Fast
 - **Authentication**: JWT with HTTP-only cookies + Google OAuth
 - **Sessions**: Starlette SessionMiddleware (required for OAuth)
 - **Templating**: Jinja2 (minimal structure only)
-- **Frontend**: Lit.js components (without Shadow DOM)
+- **Frontend**: Lit.js components + ZURB Foundation CSS Framework
 - **Validation**: Pydantic with proper schema organization
 - **File Storage**: Environment-aware upload handling
 
@@ -46,7 +47,7 @@ flash-feather-starter/
 │   ├── services/                   # Business logic services
 │   │   ├── auth_service.py         # JWT handling & cookie management
 │   │   └── google_auth_service.py  # OAuth implementation
-│   └── templates/                  # Minimal Jinja2 templates
+│   └── templates/                  # Foundation-powered templates
 │       ├── base.html
 │       ├── index.html
 │       └── auth/
@@ -55,7 +56,7 @@ flash-feather-starter/
 ├── static/                         # Frontend assets
 │   └── js/components/
 │       ├── global/
-│       │   └── app_header.js       # Auth-aware header
+│       │   └── app_header.js       # Foundation-styled header
 │       └── auth/
 │           ├── login_form.js
 │           ├── register_form.js
@@ -152,7 +153,7 @@ async def lifespan(app: FastAPI):
     # Shutdown (if needed)
 
 # Create FastAPI app with lifespan
-app = FastAPI(title="Flash Feather App", version="2.4.0", lifespan=lifespan)
+app = FastAPI(title="Flash Feather App", version="2.5.0", lifespan=lifespan)
 
 # Add SessionMiddleware FIRST (required for Google OAuth)
 import os
@@ -778,9 +779,9 @@ async def logout(response: Response):
     return {"message": "Logout successful"}
 ```
 
-## 🎨 Frontend Templates
+## 🎨 Foundation Templates
 
-### Base Template (Minimal)
+### Base Template
 
 **`app/templates/base.html`**
 
@@ -792,11 +793,13 @@ async def logout(response: Response):
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}Flash Feather App{% endblock %}</title>
 
-    <!-- External resources only -->
+    <!-- Foundation CSS -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
       rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.7.5/css/foundation.min.css"
     />
+
+    <!-- Font Awesome -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -809,6 +812,17 @@ async def logout(response: Response):
   </head>
   <body>
     <main>{% block content %}{% endblock %}</main>
+
+    <!-- Foundation JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.7.5/js/foundation.min.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        $(document).foundation();
+      });
+    </script>
+
     {% block scripts %}{% endblock %}
   </body>
 </html>
@@ -824,52 +838,17 @@ block module_imports %} import '/static/js/components/global/app_header.js?v=1';
 {% endblock %} {% block content %}
 <app-header></app-header>
 
-<div class="container">
-  <div class="hero">
-    <h1>🚀 Welcome to Flash Feather!</h1>
-    <p>
-      A minimal, LLM-friendly web framework combining Python FastAPI, Jinja2
-      templates, and Lit.js components.
-    </p>
+<div class="grid-container">
+  <div class="grid-x align-center">
+    <div class="cell large-8 text-center">
+      <h1>🚀 Welcome to Flash Feather</h1>
+      <p class="lead">
+        A minimal, LLM-friendly web framework with professional UI powered by
+        Foundation.
+      </p>
+    </div>
   </div>
 </div>
-
-<style>
-  * {
-    box-sizing: border-box;
-  }
-
-  body {
-    margin: 0;
-    font-family: "Roboto", sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh;
-  }
-
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem;
-  }
-
-  .hero {
-    text-align: center;
-    color: white;
-    padding: 4rem 0;
-  }
-
-  .hero h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  }
-
-  .hero p {
-    font-size: 1.2rem;
-    margin-bottom: 3rem;
-    opacity: 0.9;
-  }
-</style>
 {% endblock %}
 ```
 
@@ -882,88 +861,35 @@ block module_imports %} import '/static/js/components/global/app_header.js?v=1';
 {% block module_imports %} import '/static/js/components/auth/login_form.js';
 import '/static/js/components/auth/google_signin_button.js'; {% endblock %} {%
 block content %}
-<div class="auth-container">
-  <h1>Welcome Back</h1>
-  <login-form></login-form>
-  <div class="divider"><span>or</span></div>
-  <google-signin-button></google-signin-button>
+<div class="grid-container">
+  <div class="grid-x align-center">
+    <div class="cell large-4 medium-6 small-12">
+      <div class="card">
+        <div class="card-divider text-center">
+          <h3><i class="fas fa-feather-alt"></i> Welcome Back</h3>
+        </div>
 
-  <div class="auth-links">
-    <p>Don't have an account? <a href="/register">Sign up here</a></p>
-    <p><a href="/">← Back to Home</a></p>
+        <div class="card-section">
+          <login-form></login-form>
+
+          <hr />
+          <div class="text-center">
+            <p><small>or</small></p>
+          </div>
+
+          <google-signin-button></google-signin-button>
+
+          <div class="text-center">
+            <p>Don't have an account? <a href="/register">Sign up here</a></p>
+            <p>
+              <a href="/"><i class="fas fa-arrow-left"></i> Back to Home</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
-
-<style>
-  * {
-    box-sizing: border-box;
-  }
-
-  body {
-    margin: 0;
-    font-family: "Roboto", sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh;
-  }
-
-  .auth-container {
-    max-width: 400px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-
-  .auth-container h1 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 2rem;
-  }
-
-  .divider {
-    text-align: center;
-    margin: 1.5rem 0;
-    color: #666;
-    position: relative;
-  }
-
-  .divider:before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: #ddd;
-    z-index: 1;
-  }
-
-  .divider span {
-    background: white;
-    padding: 0 1rem;
-    position: relative;
-    z-index: 2;
-  }
-
-  .auth-links {
-    text-align: center;
-    margin-top: 2rem;
-  }
-
-  .auth-links p {
-    margin: 0.5rem 0;
-  }
-
-  .auth-links a {
-    color: #667eea;
-    text-decoration: none;
-  }
-
-  .auth-links a:hover {
-    text-decoration: underline;
-  }
-</style>
 {% endblock %}
 ```
 
@@ -975,92 +901,39 @@ block content %}
 '/static/js/components/auth/register_form.js'; import
 '/static/js/components/auth/google_signin_button.js'; {% endblock %} {% block
 content %}
-<div class="auth-container">
-  <h1>Create Account</h1>
-  <register-form></register-form>
-  <div class="divider"><span>or</span></div>
-  <google-signin-button></google-signin-button>
+<div class="grid-container">
+  <div class="grid-x align-center">
+    <div class="cell large-4 medium-6 small-12">
+      <div class="card">
+        <div class="card-divider text-center">
+          <h3><i class="fas fa-user-plus"></i> Create Account</h3>
+        </div>
 
-  <div class="auth-links">
-    <p>Already have an account? <a href="/login">Sign in here</a></p>
-    <p><a href="/">← Back to Home</a></p>
+        <div class="card-section">
+          <register-form></register-form>
+
+          <hr />
+          <div class="text-center">
+            <p><small>or</small></p>
+          </div>
+
+          <google-signin-button></google-signin-button>
+
+          <div class="text-center">
+            <p>Already have an account? <a href="/login">Sign in here</a></p>
+            <p>
+              <a href="/"><i class="fas fa-arrow-left"></i> Back to Home</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
-
-<style>
-  * {
-    box-sizing: border-box;
-  }
-
-  body {
-    margin: 0;
-    font-family: "Roboto", sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh;
-  }
-
-  .auth-container {
-    max-width: 400px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-
-  .auth-container h1 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 2rem;
-  }
-
-  .divider {
-    text-align: center;
-    margin: 1.5rem 0;
-    color: #666;
-    position: relative;
-  }
-
-  .divider:before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: #ddd;
-    z-index: 1;
-  }
-
-  .divider span {
-    background: white;
-    padding: 0 1rem;
-    position: relative;
-    z-index: 2;
-  }
-
-  .auth-links {
-    text-align: center;
-    margin-top: 2rem;
-  }
-
-  .auth-links p {
-    margin: 0.5rem 0;
-  }
-
-  .auth-links a {
-    color: #667eea;
-    text-decoration: none;
-  }
-
-  .auth-links a:hover {
-    text-decoration: underline;
-  }
-</style>
 {% endblock %}
 ```
 
-## 🎨 Frontend Components (Lit.js with Prefixed CSS)
+## 🎨 Foundation Lit.js Components
 
 ### App Header Component
 
@@ -1083,7 +956,6 @@ class AppHeader extends LitElement {
     this.loading = false;
   }
 
-  // Disable Shadow DOM for global styles
   createRenderRoot() {
     return this;
   }
@@ -1095,15 +967,11 @@ class AppHeader extends LitElement {
 
   async loadCurrentUser() {
     try {
-      // Just ask the server for current user - auth middleware handles everything
       const response = await fetch("/api/auth/me");
-
       if (response.ok) {
         this.user = await response.json();
       }
-      // If not authenticated, user stays null - no client-side logic needed
     } catch (error) {
-      // Silently fail - server handles auth, not the client
       console.log("Not authenticated");
     }
   }
@@ -1117,7 +985,6 @@ class AppHeader extends LitElement {
       });
 
       if (response.ok) {
-        // Let server handle the redirect by reloading page
         window.location.reload();
       }
     } catch (error) {
@@ -1129,131 +996,59 @@ class AppHeader extends LitElement {
 
   render() {
     return html`
-      <header class="app-header-container">
-        <div class="app-header-wrapper">
-          <div class="app-header-logo">
-            <a href="/" class="app-header-logo-link">
-              <i class="fas fa-feather-alt"></i>
-              Flash Feather
-            </a>
-          </div>
+      <div class="top-bar">
+        <div class="top-bar-left">
+          <ul class="dropdown menu" data-dropdown-menu>
+            <li class="menu-text">
+              <a href="/">
+                <strong
+                  ><i class="fas fa-feather-alt"></i> Flash Feather</strong
+                >
+              </a>
+            </li>
+          </ul>
+        </div>
 
-          <nav class="app-header-nav">
+        <div class="top-bar-right">
+          <ul class="menu">
             ${this.user
               ? html`
-                  <div class="app-header-user-menu">
-                    <span class="app-header-user-name"
-                      >Hello, ${this.user.name}!</span
+                  <li>
+                    <span
+                      ><i class="fas fa-user-circle"></i> ${this.user
+                        .name}</span
                     >
+                  </li>
+                  <li>
                     <button
-                      class="app-header-logout-btn"
+                      class="button alert small"
                       @click=${this.handleLogout}
                       ?disabled=${this.loading}
                     >
-                      ${this.loading ? "Logging out..." : "Logout"}
+                      ${this.loading
+                        ? html`
+                            <i class="fas fa-spinner fa-spin"></i> Logging
+                            out...
+                          `
+                        : html` <i class="fas fa-sign-out-alt"></i> Logout `}
                     </button>
-                  </div>
+                  </li>
                 `
               : html`
-                  <div class="app-header-auth-links">
-                    <a href="/login" class="app-header-nav-link">Login</a>
-                    <a
-                      href="/register"
-                      class="app-header-nav-link app-header-register"
-                      >Register</a
-                    >
-                  </div>
+                  <li>
+                    <a href="/login" class="button primary small">
+                      <i class="fas fa-sign-in-alt"></i> Login
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/register" class="button success small">
+                      <i class="fas fa-user-plus"></i> Register
+                    </a>
+                  </li>
                 `}
-          </nav>
+          </ul>
         </div>
-      </header>
-
-      <style>
-        .app-header-container {
-          background: rgba(255, 255, 255, 0.1);
-          backdrop-filter: blur(10px);
-          border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .app-header-wrapper {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 1rem 2rem;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        }
-
-        .app-header-logo-link {
-          color: white;
-          text-decoration: none;
-          font-size: 1.5rem;
-          font-weight: 700;
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-        }
-
-        .app-header-logo-link i {
-          color: #4caf50;
-        }
-
-        .app-header-user-menu {
-          display: flex;
-          align-items: center;
-          gap: 1rem;
-        }
-
-        .app-header-user-name {
-          color: white;
-          font-weight: 500;
-        }
-
-        .app-header-logout-btn {
-          background: rgba(255, 255, 255, 0.2);
-          color: white;
-          border: 1px solid rgba(255, 255, 255, 0.3);
-          padding: 0.5rem 1rem;
-          border-radius: 4px;
-          cursor: pointer;
-          transition: all 0.3s;
-        }
-
-        .app-header-logout-btn:hover:not(:disabled) {
-          background: rgba(255, 255, 255, 0.3);
-        }
-
-        .app-header-logout-btn:disabled {
-          opacity: 0.6;
-          cursor: not-allowed;
-        }
-
-        .app-header-auth-links {
-          display: flex;
-          gap: 1rem;
-        }
-
-        .app-header-nav-link {
-          color: white;
-          text-decoration: none;
-          padding: 0.5rem 1rem;
-          border-radius: 4px;
-          transition: all 0.3s;
-        }
-
-        .app-header-nav-link:hover {
-          background: rgba(255, 255, 255, 0.1);
-        }
-
-        .app-header-register {
-          background: #4caf50;
-          color: white;
-        }
-
-        .app-header-register:hover {
-          background: #45a049;
-        }
-      </style>
+      </div>
     `;
   }
 }
@@ -1282,7 +1077,6 @@ class LoginForm extends LitElement {
     this.error = "";
   }
 
-  // Disable Shadow DOM for global styles
   createRenderRoot() {
     return this;
   }
@@ -1306,7 +1100,6 @@ class LoginForm extends LitElement {
       });
 
       if (response.ok) {
-        // Cookies are set automatically by the server
         window.location.href = "/";
       } else {
         const error = await response.json();
@@ -1321,103 +1114,45 @@ class LoginForm extends LitElement {
 
   render() {
     return html`
-      <form class="login-form-container" @submit=${this.handleSubmit}>
-        <div class="login-form-group">
-          <label for="email" class="login-form-label">Email</label>
+      <form @submit=${this.handleSubmit}>
+        <label>
+          <i class="fas fa-envelope"></i> Email
           <input
             type="email"
-            id="email"
             name="email"
             required
             placeholder="Enter your email"
-            class="login-form-input"
           />
-        </div>
+        </label>
 
-        <div class="login-form-group">
-          <label for="password" class="login-form-label">Password</label>
+        <label>
+          <i class="fas fa-lock"></i> Password
           <input
             type="password"
-            id="password"
             name="password"
             required
             placeholder="Enter your password"
-            class="login-form-input"
           />
-        </div>
+        </label>
 
         ${this.error
-          ? html`<div class="login-form-error">${this.error}</div>`
+          ? html`
+              <div class="callout alert">
+                <i class="fas fa-exclamation-triangle"></i> ${this.error}
+              </div>
+            `
           : ""}
 
-        <button type="submit" ?disabled=${this.loading} class="login-form-btn">
-          ${this.loading ? "Signing in..." : "Sign In"}
+        <button
+          type="submit"
+          class="button primary expanded"
+          ?disabled=${this.loading}
+        >
+          ${this.loading
+            ? html` <i class="fas fa-spinner fa-spin"></i> Signing in... `
+            : html` <i class="fas fa-sign-in-alt"></i> Sign In `}
         </button>
       </form>
-
-      <style>
-        .login-form-container {
-          width: 100%;
-        }
-
-        .login-form-group {
-          margin-bottom: 1rem;
-        }
-
-        .login-form-label {
-          display: block;
-          margin-bottom: 0.5rem;
-          font-weight: 500;
-          color: #333;
-        }
-
-        .login-form-input {
-          width: 100%;
-          padding: 0.75rem;
-          border: 1px solid #ddd;
-          border-radius: 4px;
-          font-size: 1rem;
-          transition: border-color 0.3s;
-        }
-
-        .login-form-input:focus {
-          outline: none;
-          border-color: #667eea;
-          box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
-        }
-
-        .login-form-error {
-          color: #e74c3c;
-          margin: 1rem 0;
-          padding: 0.75rem;
-          background: #fdf2f2;
-          border: 1px solid #f5c6cb;
-          border-radius: 4px;
-          font-size: 0.9rem;
-        }
-
-        .login-form-btn {
-          width: 100%;
-          padding: 0.75rem;
-          background: #667eea;
-          color: white;
-          border: none;
-          border-radius: 4px;
-          font-size: 1rem;
-          font-weight: 500;
-          cursor: pointer;
-          transition: background-color 0.3s;
-        }
-
-        .login-form-btn:hover:not(:disabled) {
-          background: #5a6fd8;
-        }
-
-        .login-form-btn:disabled {
-          opacity: 0.6;
-          cursor: not-allowed;
-        }
-      </style>
     `;
   }
 }
@@ -1444,7 +1179,6 @@ class RegisterForm extends LitElement {
     this.error = "";
   }
 
-  // Disable Shadow DOM for global styles
   createRenderRoot() {
     return this;
   }
@@ -1461,7 +1195,6 @@ class RegisterForm extends LitElement {
       password: formData.get("password"),
     };
 
-    // Basic validation
     if (registerData.password.length < 6) {
       this.error = "Password must be at least 6 characters long";
       this.loading = false;
@@ -1476,7 +1209,6 @@ class RegisterForm extends LitElement {
       });
 
       if (response.ok) {
-        // Cookies are set automatically by the server
         window.location.href = "/";
       } else {
         const error = await response.json();
@@ -1491,120 +1223,57 @@ class RegisterForm extends LitElement {
 
   render() {
     return html`
-      <form class="register-form-container" @submit=${this.handleSubmit}>
-        <div class="register-form-group">
-          <label for="name" class="register-form-label">Full Name</label>
+      <form @submit=${this.handleSubmit}>
+        <label>
+          <i class="fas fa-user"></i> Full Name
           <input
             type="text"
-            id="name"
             name="name"
             required
             placeholder="Enter your full name"
-            class="register-form-input"
           />
-        </div>
+        </label>
 
-        <div class="register-form-group">
-          <label for="email" class="register-form-label">Email</label>
+        <label>
+          <i class="fas fa-envelope"></i> Email
           <input
             type="email"
-            id="email"
             name="email"
             required
             placeholder="Enter your email"
-            class="register-form-input"
           />
-        </div>
+        </label>
 
-        <div class="register-form-group">
-          <label for="password" class="register-form-label">Password</label>
+        <label>
+          <i class="fas fa-lock"></i> Password
           <input
             type="password"
-            id="password"
             name="password"
             required
             placeholder="Enter a password (min 6 characters)"
             minlength="6"
-            class="register-form-input"
           />
-        </div>
+          <p class="help-text">Password must be at least 6 characters long</p>
+        </label>
 
         ${this.error
-          ? html`<div class="register-form-error">${this.error}</div>`
+          ? html`
+              <div class="callout alert">
+                <i class="fas fa-exclamation-triangle"></i> ${this.error}
+              </div>
+            `
           : ""}
 
         <button
           type="submit"
+          class="button success expanded"
           ?disabled=${this.loading}
-          class="register-form-btn"
         >
-          ${this.loading ? "Creating account..." : "Create Account"}
+          ${this.loading
+            ? html` <i class="fas fa-spinner fa-spin"></i> Creating account... `
+            : html` <i class="fas fa-user-plus"></i> Create Account `}
         </button>
       </form>
-
-      <style>
-        .register-form-container {
-          width: 100%;
-        }
-
-        .register-form-group {
-          margin-bottom: 1rem;
-        }
-
-        .register-form-label {
-          display: block;
-          margin-bottom: 0.5rem;
-          font-weight: 500;
-          color: #333;
-        }
-
-        .register-form-input {
-          width: 100%;
-          padding: 0.75rem;
-          border: 1px solid #ddd;
-          border-radius: 4px;
-          font-size: 1rem;
-          transition: border-color 0.3s;
-        }
-
-        .register-form-input:focus {
-          outline: none;
-          border-color: #667eea;
-          box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
-        }
-
-        .register-form-error {
-          color: #e74c3c;
-          margin: 1rem 0;
-          padding: 0.75rem;
-          background: #fdf2f2;
-          border: 1px solid #f5c6cb;
-          border-radius: 4px;
-          font-size: 0.9rem;
-        }
-
-        .register-form-btn {
-          width: 100%;
-          padding: 0.75rem;
-          background: #667eea;
-          color: white;
-          border: none;
-          border-radius: 4px;
-          font-size: 1rem;
-          font-weight: 500;
-          cursor: pointer;
-          transition: background-color 0.3s;
-        }
-
-        .register-form-btn:hover:not(:disabled) {
-          background: #5a6fd8;
-        }
-
-        .register-form-btn:disabled {
-          opacity: 0.6;
-          cursor: not-allowed;
-        }
-      </style>
     `;
   }
 }
@@ -1629,16 +1298,13 @@ class GoogleSigninButton extends LitElement {
     this.loading = false;
   }
 
-  // Disable Shadow DOM for global styles
   createRenderRoot() {
     return this;
   }
 
   async handleGoogleSignin() {
     this.loading = true;
-
     try {
-      // Redirect to Google OAuth endpoint
       window.location.href = "/api/auth/google";
     } catch (err) {
       console.error("Google sign-in error:", err);
@@ -1649,48 +1315,14 @@ class GoogleSigninButton extends LitElement {
   render() {
     return html`
       <button
-        class="google-signin-btn"
+        class="button expanded secondary"
         @click=${this.handleGoogleSignin}
         ?disabled=${this.loading}
       >
-        <i class="fab fa-google"></i>
-        ${this.loading ? "Connecting..." : "Continue with Google"}
+        ${this.loading
+          ? html` <i class="fas fa-spinner fa-spin"></i> Connecting... `
+          : html` <i class="fab fa-google"></i> Continue with Google `}
       </button>
-
-      <style>
-        .google-signin-btn {
-          width: 100%;
-          padding: 0.75rem;
-          background: #ffffff;
-          color: #333;
-          border: 1px solid #ddd;
-          border-radius: 4px;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 0.5rem;
-          font-size: 1rem;
-          font-weight: 500;
-          transition: all 0.3s;
-        }
-
-        .google-signin-btn:hover:not(:disabled) {
-          background: #f8f9fa;
-          border-color: #ccc;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .google-signin-btn:disabled {
-          opacity: 0.6;
-          cursor: not-allowed;
-        }
-
-        .google-signin-btn i {
-          color: #4285f4;
-          font-size: 1.1rem;
-        }
-      </style>
     `;
   }
 }
@@ -1886,54 +1518,50 @@ REFRESH_TOKEN_EXPIRE_SECONDS=300   # 5 minutes
 - **Production**: Data stored outside project directory
 - **Automatic**: No manual configuration needed
 
-### 3. Minimal Frontend Logic
+### 3. Professional UI with Foundation
+
+- ZURB Foundation provides enterprise-grade design
+- Responsive grid system and components
+- Accessibility features built-in
+- No custom CSS required for professional appearance
+
+### 4. Minimal Frontend Logic
 
 - Components focus on UI and user interaction
 - No authentication logic in JavaScript
 - Server provides data via clean API endpoints
+- Foundation handles styling and responsive behavior
 
-### 4. Production-Ready Defaults
+### 5. Production-Ready Defaults
 
 - Proper error handling and validation
 - Secure cookie configuration
 - Environment-based configuration
 - Database persistence through deployments
+- Professional UI that scales across devices
 
-### 5. Clean Code Organization
+### 6. Clean Code Organization
 
 - Web routes only serve HTML and handle redirections
 - API routes separated from schemas
 - Business logic in service layers
 - Centralized auth methods for consistency
-- **Minimal base template** - no global styles or structures
-- **Page-specific styling** - styles belong where they're used
-- **Component-scoped styles** - Lit.js components with prefixed CSS classes
-
-### 6. No Shadow DOM CSS Conflicts
-
-Since we disable Shadow DOM to access global styles (Font Awesome icons), all component CSS classes **must be prefixed** with the component name:
-
-- ✅ **app-header** → `.app-header-container`, `.app-header-nav-link`, etc.
-- ✅ **login-form** → `.login-form-container`, `.login-form-group`, `.login-form-btn`, etc.
-- ✅ **register-form** → `.register-form-container`, `.register-form-group`, `.register-form-btn`, etc.
-- ✅ **google-signin-button** → `.google-signin-btn` (already correctly named)
-
-This prevents CSS conflicts between components while maintaining access to global icon libraries.
+- Foundation components for consistent UI patterns
 
 ## 🎉 Summary
 
-Flash Feather v2.4 provides a complete, modern web framework with:
+Flash Feather v2.5 provides a complete, modern web framework with:
 
-- ✅ **Component-prefixed CSS classes** preventing conflicts without Shadow DOM
-- ✅ **Truly minimal base template** with only essential structure
-- ✅ **Page-specific styling** properly organized in individual templates
-- ✅ **Component-scoped styles** in Lit.js components with proper naming
+- ✅ **ZURB Foundation integration** for professional UI design
+- ✅ **Responsive grid system** that works across all devices
+- ✅ **Enterprise-grade components** (cards, forms, navigation, etc.)
 - ✅ **Centralized authentication system** with clean service methods
 - ✅ **Seamless token refresh** for uninterrupted user experience
 - ✅ **Server-side control** following Flash Feather principles
 - ✅ **Environment-aware architecture** for development and production
-- ✅ **Clean separation of concerns** with proper style organization
+- ✅ **Clean separation of concerns** with Foundation handling UI
 - ✅ **Modern Python practices** with updated deprecation fixes
 - ✅ **Production-ready deployment** with data persistence
+- ✅ **Zero custom CSS required** - Foundation provides everything
 
-**Perfect for building modern web applications with AI assistance!** 🚀
+**Perfect for building modern web applications with AI assistance and professional design!** 🚀
