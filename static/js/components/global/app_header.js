@@ -14,7 +14,6 @@ class AppHeader extends LitElement {
     this.loading = false;
   }
 
-  // Disable Shadow DOM for semantic styles
   createRenderRoot() {
     return this;
   }
@@ -55,97 +54,59 @@ class AppHeader extends LitElement {
 
   render() {
     return html`
-      <header class="app-header">
-        <div class="container">
-          <nav class="app-header-nav">
-            <a href="/" class="app-header-logo">
-              <i class="fas fa-feather-alt"></i>
-              Flash Feather
-            </a>
+      <div class="top-bar">
+        <div class="top-bar-left">
+          <ul class="dropdown menu" data-dropdown-menu>
+            <li class="menu-text">
+              <a href="/">
+                <strong
+                  ><i class="fas fa-feather-alt"></i> Flash Feather</strong
+                >
+              </a>
+            </li>
+          </ul>
+        </div>
 
-            <div class="app-header-actions">
-              ${this.user
-                ? html`
-                    <span class="app-header-user"
-                      >Hello, <strong>${this.user.name}</strong>!</span
+        <div class="top-bar-right">
+          <ul class="menu">
+            ${this.user
+              ? html`
+                  <li>
+                    <span
+                      ><i class="fas fa-user-circle"></i> ${this.user
+                        .name}</span
                     >
+                  </li>
+                  <li>
                     <button
-                      data-variant="ghost"
+                      class="button alert small"
                       @click=${this.handleLogout}
                       ?disabled=${this.loading}
                     >
-                      ${this.loading ? "Logging out..." : "Logout"}
+                      ${this.loading
+                        ? html`
+                            <i class="fas fa-spinner fa-spin"></i> Logging
+                            out...
+                          `
+                        : html` <i class="fas fa-sign-out-alt"></i> Logout `}
                     </button>
-                  `
-                : html`
-                    <a href="/login" data-variant="ghost">Login</a>
-                    <a href="/register">Register</a>
-                  `}
-            </div>
-          </nav>
+                  </li>
+                `
+              : html`
+                  <li>
+                    <a href="/login" class="button primary small">
+                      <i class="fas fa-sign-in-alt"></i> Login
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/register" class="button success small">
+                      <i class="fas fa-user-plus"></i> Register
+                    </a>
+                  </li>
+                `}
+          </ul>
         </div>
-      </header>
-
-      <style>
-        .app-header {
-          background: var(--white-05);
-          border-bottom: 1px solid var(--white-10);
-          backdrop-filter: blur(10px);
-          margin-bottom: var(--space-6);
-        }
-
-        .app-header-nav {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: var(--space-4) 0;
-        }
-
-        .app-header-logo {
-          font-family: var(--font-fancy);
-          font-size: 1.5rem;
-          font-weight: 600;
-          color: var(--white) !important;
-          text-decoration: none !important;
-          display: flex;
-          align-items: center;
-          gap: var(--space-2);
-        }
-
-        .app-header-logo i {
-          color: var(--accent);
-        }
-
-        .app-header-actions {
-          display: flex;
-          align-items: center;
-          gap: var(--space-4);
-        }
-
-        .app-header-user {
-          color: var(--white-70);
-          font-size: 0.875rem;
-        }
-
-        @media (max-width: 768px) {
-          .app-header-nav {
-            flex-direction: column;
-            gap: var(--space-4);
-          }
-
-          .app-header-actions {
-            flex-direction: column;
-            gap: var(--space-2);
-            width: 100%;
-          }
-
-          .app-header-actions button,
-          .app-header-actions a {
-            width: 100%;
-            text-align: center;
-          }
-        }
-      </style>
+      </div>
     `;
   }
 }

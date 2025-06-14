@@ -14,7 +14,6 @@ class LoginForm extends LitElement {
     this.error = "";
   }
 
-  // Disable Shadow DOM for semantic styles
   createRenderRoot() {
     return this;
   }
@@ -53,44 +52,43 @@ class LoginForm extends LitElement {
   render() {
     return html`
       <form @submit=${this.handleSubmit}>
-        <div class="form-group">
-          <label for="login-email">Email</label>
+        <label>
+          <i class="fas fa-envelope"></i> Email
           <input
             type="email"
-            id="login-email"
             name="email"
             required
             placeholder="Enter your email"
-            ?disabled=${this.loading}
           />
-        </div>
+        </label>
 
-        <div class="form-group">
-          <label for="login-password">Password</label>
+        <label>
+          <i class="fas fa-lock"></i> Password
           <input
             type="password"
-            id="login-password"
             name="password"
             required
             placeholder="Enter your password"
-            ?disabled=${this.loading}
           />
-        </div>
+        </label>
 
         ${this.error
-          ? html`<div class="error-message">
-              <i class="fas fa-exclamation-circle"></i>
-              ${this.error}
-            </div>`
+          ? html`
+              <div class="callout alert">
+                <i class="fas fa-exclamation-triangle"></i> ${this.error}
+              </div>
+            `
           : ""}
 
-        <div class="form-group">
-          <button type="submit" ?disabled=${this.loading}>
-            ${this.loading
-              ? html`<i class="fas fa-spinner fa-spin"></i> Signing in...`
-              : html`<i class="fas fa-sign-in-alt"></i> Sign In`}
-          </button>
-        </div>
+        <button
+          type="submit"
+          class="button primary expanded"
+          ?disabled=${this.loading}
+        >
+          ${this.loading
+            ? html` <i class="fas fa-spinner fa-spin"></i> Signing in... `
+            : html` <i class="fas fa-sign-in-alt"></i> Sign In `}
+        </button>
       </form>
     `;
   }

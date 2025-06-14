@@ -12,7 +12,6 @@ class GoogleSigninButton extends LitElement {
     this.loading = false;
   }
 
-  // Disable Shadow DOM for semantic styles
   createRenderRoot() {
     return this;
   }
@@ -30,30 +29,14 @@ class GoogleSigninButton extends LitElement {
   render() {
     return html`
       <button
-        data-variant="secondary"
+        class="button expanded secondary"
         @click=${this.handleGoogleSignin}
         ?disabled=${this.loading}
-        class="google-signin-btn"
       >
         ${this.loading
-          ? html`<i class="fas fa-spinner fa-spin"></i> Connecting...`
-          : html`<i class="fab fa-google"></i> Continue with Google`}
+          ? html` <i class="fas fa-spinner fa-spin"></i> Connecting... `
+          : html` <i class="fab fa-google"></i> Continue with Google `}
       </button>
-
-      <style>
-        .google-signin-btn {
-          width: 100%;
-          justify-content: center;
-        }
-
-        .google-signin-btn i {
-          color: #4285f4;
-        }
-
-        .google-signin-btn:hover i {
-          color: var(--white);
-        }
-      </style>
     `;
   }
 }

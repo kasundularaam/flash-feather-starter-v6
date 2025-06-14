@@ -3,100 +3,198 @@ block module_imports %} import '/static/js/components/global/app_header.js?v=1';
 {% endblock %} {% block content %}
 <app-header></app-header>
 
-<div class="container">
-  <section class="text-center">
-    <h1>🚀 Flash Feather</h1>
-    <p>
-      A minimal, LLM-friendly web framework combining Python FastAPI, Jinja2
-      templates, and Lit.js components.
-    </p>
+<!-- Hero Section -->
+<div class="hero text-center">
+  <div class="grid-container">
+    <div class="grid-x align-center">
+      <div class="cell large-8">
+        <h1 class="display-1">🚀 Flash Feather</h1>
+        <p class="lead">
+          A minimal, LLM-friendly web framework combining Python FastAPI, Jinja2
+          templates, and Lit.js components.
+        </p>
 
-    <div class="flex" style="justify-content: center; margin-top: 2rem">
-      <a href="/login" data-variant="secondary">Get Started</a>
-      <a href="/demo" data-variant="secondary">See Demo</a>
-      <a href="https://github.com/your-repo/flash-feather" target="_blank">
-        <i class="fab fa-github"></i> View on GitHub
-      </a>
-    </div>
-  </section>
-
-  <section>
-    <h2>Features</h2>
-
-    <article>
-      <h3>✨ Semantic HTML First</h3>
-      <p>
-        Write clean, semantic HTML and get beautiful UI automatically. No
-        classes needed for basic elements.
-      </p>
-
-      <pre><code>&lt;h1&gt;My App&lt;/h1&gt;
-&lt;p&gt;Beautiful by default&lt;/p&gt;
-&lt;button&gt;Click Me&lt;/button&gt;</code></pre>
-    </article>
-
-    <article>
-      <h3>🔒 Built-in Authentication</h3>
-      <p>
-        JWT cookies, automatic token refresh, Google OAuth, and secure session
-        management out of the box.
-      </p>
-
-      <ul>
-        <li>HTTP-only cookie authentication</li>
-        <li>Automatic token refresh middleware</li>
-        <li>Google OAuth integration</li>
-        <li>Server-side route protection</li>
-      </ul>
-    </article>
-
-    <article>
-      <h3>⚡ Lit.js Components</h3>
-      <p>
-        Modern web components without Shadow DOM complexity. Perfect for adding
-        interactivity to semantic HTML.
-      </p>
-
-      <div class="flex">
-        <button onclick="alert('Semantic button!')">Semantic Button</button>
-        <button data-variant="secondary">Secondary</button>
-        <button data-variant="ghost">Ghost</button>
+        <div class="button-group">
+          <a href="#features" class="button large primary">
+            <i class="fas fa-rocket"></i> Explore Features
+          </a>
+          <a
+            href="https://github.com/your-username/flash-feather"
+            class="button large secondary"
+          >
+            <i class="fab fa-github"></i> View on GitHub
+          </a>
+        </div>
       </div>
-    </article>
+    </div>
+  </div>
+</div>
 
-    <article>
-      <h3>🌍 Environment Aware</h3>
-      <p>
-        Automatic development/production configuration. Database and uploads
-        handled intelligently based on environment.
-      </p>
+<!-- Features Section -->
+<div id="features" class="section">
+  <div class="grid-container">
+    <div class="grid-x align-center">
+      <div class="cell large-10 text-center">
+        <h2>Why Flash Feather?</h2>
+        <p class="lead">Modern web development made simple and secure</p>
+      </div>
+    </div>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Environment</th>
-            <th>Database</th>
-            <th>Uploads</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Development</td>
-            <td>./database.db</td>
-            <td>./uploads/</td>
-          </tr>
-          <tr>
-            <td>Production</td>
-            <td>/var/www/data/database.db</td>
-            <td>/var/www/data/uploads/</td>
-          </tr>
-        </tbody>
-      </table>
-    </article>
-  </section>
+    <div class="grid-x grid-margin-x">
+      <div class="cell large-4 medium-6">
+        <div class="card">
+          <div class="card-divider text-center">
+            <i class="fas fa-feather-alt fa-3x text-primary"></i>
+          </div>
+          <div class="card-section text-center">
+            <h4>Minimal & Clean</h4>
+            <p>
+              Simple architecture without unnecessary abstractions. Perfect for
+              AI-assisted development.
+            </p>
+          </div>
+        </div>
+      </div>
 
-  <footer>
-    <p>&copy; 2024 Flash Feather. Built with ❤️ for modern web development.</p>
-  </footer>
+      <div class="cell large-4 medium-6">
+        <div class="card">
+          <div class="card-divider text-center">
+            <i class="fas fa-shield-alt fa-3x text-success"></i>
+          </div>
+          <div class="card-section text-center">
+            <h4>Secure by Default</h4>
+            <p>
+              HTTP-only cookies, JWT tokens, automatic refresh, and server-side
+              authentication control.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="cell large-4 medium-6">
+        <div class="card">
+          <div class="card-divider text-center">
+            <i class="fas fa-cogs fa-3x text-warning"></i>
+          </div>
+          <div class="card-section text-center">
+            <h4>Production Ready</h4>
+            <p>
+              Environment-aware configuration, data persistence, and CI/CD
+              deployment ready.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="cell large-4 medium-6">
+        <div class="card">
+          <div class="card-divider text-center">
+            <i class="fas fa-bolt fa-3x text-primary"></i>
+          </div>
+          <div class="card-section text-center">
+            <h4>FastAPI Backend</h4>
+            <p>
+              Modern Python with async support, automatic API docs, and high
+              performance.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="cell large-4 medium-6">
+        <div class="card">
+          <div class="card-divider text-center">
+            <i class="fas fa-puzzle-piece fa-3x text-success"></i>
+          </div>
+          <div class="card-section text-center">
+            <h4>Lit.js Components</h4>
+            <p>
+              Modern web components without the complexity. Clean, reusable, and
+              framework-agnostic.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="cell large-4 medium-6">
+        <div class="card">
+          <div class="card-divider text-center">
+            <i class="fab fa-google fa-3x text-primary"></i>
+          </div>
+          <div class="card-section text-center">
+            <h4>OAuth Integration</h4>
+            <p>
+              Google OAuth built-in with proper session handling and secure
+              token management.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Tech Stack Section -->
+<div class="section">
+  <div class="grid-container">
+    <div class="grid-x align-center">
+      <div class="cell large-10 text-center">
+        <h2>Modern Tech Stack</h2>
+
+        <div class="callout primary">
+          <div class="grid-x grid-margin-x text-center">
+            <div class="cell large-2 medium-4 small-6">
+              <i class="fab fa-python fa-3x"></i>
+              <h6>Python FastAPI</h6>
+            </div>
+            <div class="cell large-2 medium-4 small-6">
+              <i class="fas fa-database fa-3x"></i>
+              <h6>SQLite + SQLAlchemy</h6>
+            </div>
+            <div class="cell large-2 medium-4 small-6">
+              <i class="fab fa-js-square fa-3x"></i>
+              <h6>Lit.js Components</h6>
+            </div>
+            <div class="cell large-2 medium-4 small-6">
+              <i class="fas fa-lock fa-3x"></i>
+              <h6>JWT + OAuth</h6>
+            </div>
+            <div class="cell large-2 medium-4 small-6">
+              <i class="fas fa-mobile-alt fa-3x"></i>
+              <h6>Responsive Design</h6>
+            </div>
+            <div class="cell large-2 medium-4 small-6">
+              <i class="fas fa-rocket fa-3x"></i>
+              <h6>Production Ready</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA Section -->
+<div class="section text-center">
+  <div class="grid-container">
+    <div class="grid-x align-center">
+      <div class="cell large-8">
+        <h2>Ready to Build Something Amazing?</h2>
+        <p class="lead">
+          Get started with Flash Feather today and experience the joy of clean,
+          modern web development.
+        </p>
+
+        <div class="button-group">
+          <a href="/register" class="button large success">
+            <i class="fas fa-user-plus"></i> Get Started Free
+          </a>
+          <a href="/login" class="button large primary">
+            <i class="fas fa-sign-in-alt"></i> Sign In
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}

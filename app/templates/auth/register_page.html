@@ -3,51 +3,33 @@
 '/static/js/components/auth/register_form.js'; import
 '/static/js/components/auth/google_signin_button.js'; {% endblock %} {% block
 content %}
-<div class="container" style="max-width: 400px; margin-top: 4rem">
-  <header class="text-center">
-    <h1>Create Account</h1>
-    <p>Join Flash Feather and start building</p>
-  </header>
+<div class="grid-container">
+  <div class="grid-x align-center">
+    <div class="cell large-4 medium-6 small-12">
+      <div class="card">
+        <div class="card-divider text-center">
+          <h3><i class="fas fa-user-plus"></i> Create Account</h3>
+        </div>
 
-  <article>
-    <register-form></register-form>
+        <div class="card-section">
+          <register-form></register-form>
 
-    <div
-      style="
-        text-align: center;
-        margin: 1.5rem 0;
-        color: var(--white-50);
-        position: relative;
-      "
-    >
-      <span
-        style="
-          background: var(--bg);
-          padding: 0 1rem;
-          position: relative;
-          z-index: 2;
-        "
-        >or</span
-      >
-      <div
-        style="
-          position: absolute;
-          top: 50%;
-          left: 0;
-          right: 0;
-          height: 1px;
-          background: var(--white-10);
-          z-index: 1;
-        "
-      ></div>
+          <hr />
+          <div class="text-center">
+            <p><small>or</small></p>
+          </div>
+
+          <google-signin-button></google-signin-button>
+
+          <div class="text-center">
+            <p>Already have an account? <a href="/login">Sign in here</a></p>
+            <p>
+              <a href="/"><i class="fas fa-arrow-left"></i> Back to Home</a>
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <google-signin-button></google-signin-button>
-  </article>
-
-  <footer class="text-center">
-    <p>Already have an account? <a href="/login">Sign in here</a></p>
-    <p><a href="/">← Back to Home</a></p>
-  </footer>
+  </div>
 </div>
 {% endblock %}

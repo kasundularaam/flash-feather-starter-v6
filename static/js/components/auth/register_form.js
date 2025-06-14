@@ -14,7 +14,6 @@ class RegisterForm extends LitElement {
     this.error = "";
   }
 
-  // Disable Shadow DOM for semantic styles
   createRenderRoot() {
     return this;
   }
@@ -31,7 +30,6 @@ class RegisterForm extends LitElement {
       password: formData.get("password"),
     };
 
-    // Basic validation
     if (registerData.password.length < 6) {
       this.error = "Password must be at least 6 characters long";
       this.loading = false;
@@ -61,58 +59,55 @@ class RegisterForm extends LitElement {
   render() {
     return html`
       <form @submit=${this.handleSubmit}>
-        <div class="form-group">
-          <label for="register-name">Full Name</label>
+        <label>
+          <i class="fas fa-user"></i> Full Name
           <input
             type="text"
-            id="register-name"
             name="name"
             required
             placeholder="Enter your full name"
-            ?disabled=${this.loading}
           />
-        </div>
+        </label>
 
-        <div class="form-group">
-          <label for="register-email">Email</label>
+        <label>
+          <i class="fas fa-envelope"></i> Email
           <input
             type="email"
-            id="register-email"
             name="email"
             required
             placeholder="Enter your email"
-            ?disabled=${this.loading}
           />
-        </div>
+        </label>
 
-        <div class="form-group">
-          <label for="register-password">Password</label>
+        <label>
+          <i class="fas fa-lock"></i> Password
           <input
             type="password"
-            id="register-password"
             name="password"
             required
             placeholder="Enter a password (min 6 characters)"
             minlength="6"
-            ?disabled=${this.loading}
           />
-          <small>Must be at least 6 characters long</small>
-        </div>
+          <p class="help-text">Password must be at least 6 characters long</p>
+        </label>
 
         ${this.error
-          ? html`<div class="error-message">
-              <i class="fas fa-exclamation-circle"></i>
-              ${this.error}
-            </div>`
+          ? html`
+              <div class="callout alert">
+                <i class="fas fa-exclamation-triangle"></i> ${this.error}
+              </div>
+            `
           : ""}
 
-        <div class="form-group">
-          <button type="submit" ?disabled=${this.loading}>
-            ${this.loading
-              ? html`<i class="fas fa-spinner fa-spin"></i> Creating account...`
-              : html`<i class="fas fa-user-plus"></i> Create Account`}
-          </button>
-        </div>
+        <button
+          type="submit"
+          class="button success expanded"
+          ?disabled=${this.loading}
+        >
+          ${this.loading
+            ? html` <i class="fas fa-spinner fa-spin"></i> Creating account... `
+            : html` <i class="fas fa-user-plus"></i> Create Account `}
+        </button>
       </form>
     `;
   }
